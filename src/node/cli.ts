@@ -4,6 +4,7 @@ import { cac } from "cac";
 import { createDevServer } from "./dev";
 // 引入 path 模块，用于处理路径
 import path = require("path");
+import build from "./build";
 
 // 从 package.json 中获取版本号
 const version = require("../../package.json").version;
@@ -35,7 +36,8 @@ cli.command("dev [root]", "start dev server").action(async (root: string) => {
 cli
   .command("build [root]", "build for production")
   .action(async (root: string) => {
-    console.log("build", root);
+    root = root ? path.resolve(root) : process.cwd();
+    await build(root);
   });
 
 // 调用 cli.parse 方法解析命令行参数

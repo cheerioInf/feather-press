@@ -15,3 +15,11 @@ export const CLIENT_ENTRY_PATH = join(
   "runtime",
   "client-entry.tsx"
 );
+
+// SERVER_ENTRY_PATH 是指项目根目录下的 src/runtime/server-entry.tsx
+export const SERVER_ENTRY_PATH = join(
+  PACKAGE_ROOT,
+  "src",
+  "runtime",
+  "server-entry.tsx"
+);
