@@ -11,7 +11,7 @@ const version = require("../../package.json").version;
 
 // 创建命令行实例
 // 传入项目名称、版本号、设置帮助信息
-const cli = cac("island")
+const cli = cac("feather")
   .version(version)
   .help(() => {
     console.log("帮助信息");

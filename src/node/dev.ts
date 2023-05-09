@@ -1,5 +1,5 @@
 import { createServer as createViteDevServer } from "vite";
-import pluginIndexHtml from "./plugin-island/indexHtml";
+import pluginIndexHtml from "./plugin-feather/indexHtml";
 import pluginReact from "@vitejs/plugin-react";
 
 // 接收 root 参数，返回一个 vite 的 dev server
