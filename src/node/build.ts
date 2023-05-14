@@ -1,8 +1,8 @@
-import { InlineConfig, build as viteBuild } from "vite";
-import { CLIENT_ENTRY_PATH, SERVER_ENTRY_PATH } from "./constants";
-import { join } from "path";
-import fs from "fs-extra";
-import type { RollupOutput } from "rollup";
+import { InlineConfig, build as viteBuild } from 'vite';
+import { CLIENT_ENTRY_PATH, SERVER_ENTRY_PATH } from './constants';
+import { join } from 'path';
+import fs from 'fs-extra';
+import type { RollupOutput } from 'rollup';
 
 // 打包 client 和 server 的 bundle 文件
 async function bundle(root: string) {
@@ -10,18 +10,18 @@ async function bundle(root: string) {
     // 生成 vite config
     const resolveViteConfig = (isServer: boolean): InlineConfig => {
       return {
-        mode: "production",
+        mode: 'production',
         root,
         build: {
           ssr: isServer,
-          outDir: isServer ? ".temp" : "build",
+          outDir: isServer ? '.temp' : 'build',
           rollupOptions: {
             input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,
             output: {
-              format: isServer ? "cjs" : "esm",
-            },
-          },
-        },
+              format: isServer ? 'cjs' : 'esm'
+            }
+          }
+        }
       };
     };
 
@@ -33,11 +33,11 @@ async function bundle(root: string) {
       return viteBuild(resolveViteConfig(true));
     };
 
-    console.log("building client and server bundles...");
+    console.log('building client and server bundles...');
 
     const [clientBundle, serverBundle] = await Promise.all([
       clientBuild(),
-      serverBuild(),
+      serverBuild()
     ]);
     return [clientBundle, serverBundle] as [RollupOutput, RollupOutput];
   } catch (err) {
@@ -54,7 +54,7 @@ async function renderPage(
   const appHtml = render();
   // 读取 client bundle 文件，获取 client bundle 文件名
   const clinetChunk = clientBundle.output.find(
-    (chunk) => chunk.type === "chunk"
+    (chunk) => chunk.type === 'chunk'
   );
   const html = `
     <!DOCTYPE html>
@@ -72,16 +72,16 @@ async function renderPage(
     </html>
   `.trim();
   // 将 html 文件输出到 build 目录
-  await fs.writeFile(join(root, "build", "index.html"), html);
+  await fs.writeFile(join(root, 'build', 'index.html'), html);
   // 删除 .temp 目录
-  await fs.remove(join(root, ".temp"));
+  await fs.remove(join(root, '.temp'));
 }
 
 export default async function build(root: string) {
   // 打包 client 和 server 的 bundle 文件
-  const [clientBundle, serverBundle] = await bundle(root);
+  const [clientBundle] = await bundle(root);
   // 读取 server bundle 文件，获取 render 函数
-  const serverEntryPath = join(root, ".temp", "server-entry.js");
+  const serverEntryPath = join(root, '.temp', 'server-entry.js');
   const { render } = await import(serverEntryPath);
   // 生成 html 文件，将 client bundle 注入到 html 中，输出到 build 目录，完成打包
   await renderPage(render, root, clientBundle);
