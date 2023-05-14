@@ -1,9 +1,8 @@
 import { join } from "path";
 
-// 这里的 __dirname 是指 src/node/constants
-// 而不是 src/node/constants/index.ts
-// 经过 join 之后，PACKAGE_ROOT 是指项目根目录
-export const PACKAGE_ROOT = join(__dirname, "..", "..", "..");
+// __dirname 指的是打包后的 cli 文件所在的目录
+// 通过 join 函数，我们可以得到项目根目录
+export const PACKAGE_ROOT = join(__dirname, "..");
 
 // DEFAULT_HTML_PATH 是指项目根目录下的 template.html
 export const DEFAULT_HTML_PATH = join(PACKAGE_ROOT, "template.html");

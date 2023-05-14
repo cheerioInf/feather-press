@@ -1,15 +1,17 @@
 // TypeScript 配置文件
 {
-    "compilerOptions": {
-        // 编译输出目录
-        "outDir": "dist",
-        // 编译后的代码使用的 JavaScript 版本，ESNext 表示最新的 JavaScript 版本
-        "target": "ESNext",
-        // 使用的模块化标准
-        "module": "CommonJS",
-        // 源代码目录
-        "rootDir": "src",
-        // 是否支持 jsx 语法，react-jsx 表示支持 react 的 jsx 语法
-        "jsx": "react-jsx"
-    }
+  "compilerOptions": {
+    // 编译输出目录
+    "outDir": "dist",
+    // 编译后的代码使用的 JavaScript 版本，ESNext 表示最新的 JavaScript 版本
+    "target": "ESNext",
+    // 使用的模块化标准
+    "module": "CommonJS",
+    // 源代码目录
+    "rootDir": ".",
+    // 是否支持 jsx 语法，react-jsx 表示支持 react 的 jsx 语法
+    "jsx": "react-jsx",
+    // esModuleInterop 表示是否允许 import export 语法
+    "esModuleInterop": true
+  },
 }

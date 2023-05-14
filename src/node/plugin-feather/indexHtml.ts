@@ -3,37 +3,10 @@ import { Plugin } from "vite";
 import { CLIENT_ENTRY_PATH, DEFAULT_HTML_PATH } from "../constants";
 
 export default function pluginIndexHtml(): Plugin {
-  // 将 template.html 作为 index.html
   return {
-    name: "island:index-html",
-    // 作用于 serve 模式，即开发模式
+    name: "feather:index-html",
     apply: "serve",
-    // transformIndexHtml 的作用是修改 index.html
-    // 接收一个参数，即 index.html 的内容
-    // 返回一个对象，包含两个属性：
-    // html: string，即修改后的 index.html 的内容
-    // tags: Array，即需要插入到 index.html 的标签
-    // 这里的标签是一个对象，包含三个属性：
-    // tag: string，即标签名
-    // attrs: Record<string, string>，即标签的属性
-    // injectTo: string，即标签的插入位置
-    transformIndexHtml(html) {
-      return {
-        html,
-        tags: [
-          {
-            tag: "script",
-            attrs: {
-              type: "module",
-              // @fs 的作用是将路径转换为项目根目录的路径
-              src: `/@fs/${CLIENT_ENTRY_PATH}`,
-            },
-            injectTo: "body",
-          },
-        ],
-      };
-    },
-    // configureServer 的作用是在 dev server 启动之前对其进行配置
+    // configureServer 的作用是在 devServer 启动之前对其进行配置
     configureServer(server) {
       return () => {
         // server.middlewares.use 的作用是添加一个中间件
@@ -62,6 +35,31 @@ export default function pluginIndexHtml(): Plugin {
             return next(e);
           }
         });
+      };
+    },
+    // transformIndexHtml 的作用是修改 index.html
+    // 接收一个参数，即 index.html 的内容
+    // 返回一个对象，包含两个属性：
+    // html: string，即 index.html 的内容
+    // tags: Array，即需要插入到 index.html 的标签
+    // 这里的标签是一个对象，包含三个属性：
+    // tag: string，即标签名
+    // attrs: Record<string, string>，即标签的属性
+    // injectTo: string，即标签的插入位置
+    transformIndexHtml(html) {
+      return {
+        html,
+        tags: [
+          {
+            tag: "script",
+            attrs: {
+              type: "module",
+              // @fs 的作用是将路径转换为项目根目录的路径
+              src: `/@fs/${CLIENT_ENTRY_PATH}`,
+            },
+            injectTo: "body",
+          },
+        ],
       };
     },
   };

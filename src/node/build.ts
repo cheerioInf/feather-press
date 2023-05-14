@@ -1,7 +1,7 @@
 import { InlineConfig, build as viteBuild } from "vite";
 import { CLIENT_ENTRY_PATH, SERVER_ENTRY_PATH } from "./constants";
-import * as path from "path";
-import * as fs from "fs-extra";
+import { join } from "path";
+import fs from "fs-extra";
 import type { RollupOutput } from "rollup";
 
 // 打包 client 和 server 的 bundle 文件
@@ -33,7 +33,7 @@ async function bundle(root: string) {
       return viteBuild(resolveViteConfig(true));
     };
 
-    console.log("Building client + server bundles...");
+    console.log("building client and server bundles...");
 
     const [clientBundle, serverBundle] = await Promise.all([
       clientBuild(),
@@ -67,22 +67,22 @@ async function renderPage(
       </head>
       <body>
         <div id="root">${appHtml}</div>
-        <script src="/${clinetChunk.fileName}"></script>
+        <script type="module" src="./${clinetChunk.fileName}"></script>
       </body>
     </html>
   `.trim();
   // 将 html 文件输出到 build 目录
-  await fs.writeFile(path.join(root, "build", "index.html"), html);
+  await fs.writeFile(join(root, "build", "index.html"), html);
   // 删除 .temp 目录
-  await fs.remove(path.join(root, ".temp"));
+  await fs.remove(join(root, ".temp"));
 }
 
 export default async function build(root: string) {
   // 打包 client 和 server 的 bundle 文件
   const [clientBundle, serverBundle] = await bundle(root);
   // 读取 server bundle 文件，获取 render 函数
-  const serverEntryPath = path.join(root, ".temp", "server-entry.js");
-  const { render } = require(serverEntryPath);
+  const serverEntryPath = join(root, ".temp", "server-entry.js");
+  const { render } = await import(serverEntryPath);
   // 生成 html 文件，将 client bundle 注入到 html 中，输出到 build 目录，完成打包
   await renderPage(render, root, clientBundle);
 }
