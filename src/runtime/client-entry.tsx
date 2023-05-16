@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import { App } from './App';
+import { BrowserRouter } from 'react-router-dom';
 
 function renderInBrowser() {
   // 获取 root 元素
@@ -9,7 +10,11 @@ function renderInBrowser() {
     throw new Error('root element not found');
   }
   // 渲染
-  createRoot(containerEl).render(<App />);
+  createRoot(containerEl).render(
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
 }
 
 renderInBrowser();

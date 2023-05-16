@@ -5,4 +5,4 @@ pnpm-lock.yaml
 dist
 bin
 esm-cjs
-docs
+docs/build

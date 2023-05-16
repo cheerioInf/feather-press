@@ -3,6 +3,7 @@ import path from 'path';
 import { cac } from 'cac';
 // 引入 build 函数，用于构建项目
 import build from './build';
+import { resolveConfig } from './config';
 
 // 从 package.json 中获取版本号
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -41,8 +42,13 @@ cli.command('dev [root]', 'start dev server').action(async (root: string) => {
 cli
   .command('build [root]', 'build for production')
   .action(async (root: string) => {
-    root = root ? path.resolve(root) : process.cwd();
-    await build(root);
+    try {
+      root = root ? path.resolve(root) : process.cwd();
+      const config = await resolveConfig(root, 'build', 'production');
+      await build(root, config);
+    } catch (e) {
+      console.error(e);
+    }
   });
 
 // 调用 cli.parse 方法解析命令行参数

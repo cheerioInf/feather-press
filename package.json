@@ -26,6 +26,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.3",
     "@commitlint/config-conventional": "^17.6.3",
+    "@loadable/component": "^5.15.3",
     "@playwright/test": "1.26.1",
     "@types/fs-extra": "^9.0.13",
     "@types/node": "^18.11.7",
@@ -53,11 +54,13 @@
     "cac": "^6.7.14",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "fast-glob": "^3.2.12",
     "fs-extra": "^10.1.0",
     "ora": "^6.1.2",
     "prettier": "^2.8.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "6.4.3",
     "vite": "^3.2.1"
   }
 }

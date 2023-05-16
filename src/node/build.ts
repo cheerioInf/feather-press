@@ -3,18 +3,26 @@ import { CLIENT_ENTRY_PATH, SERVER_ENTRY_PATH } from './constants';
 import { join } from 'path';
 import fs from 'fs-extra';
 import type { RollupOutput } from 'rollup';
+import { SiteConfig } from '../shared/types/index';
+import pluginReact from '@vitejs/plugin-react';
+import { pluginConfig } from './plugin-feather/config';
 
 // 打包 client 和 server 的 bundle 文件
-async function bundle(root: string) {
+async function bundle(root: string, config: SiteConfig) {
   try {
     // 生成 vite config
     const resolveViteConfig = (isServer: boolean): InlineConfig => {
       return {
         mode: 'production',
         root,
+        plugins: [pluginReact(), pluginConfig(config)],
+        ssr: {
+          // 注意加上这个配置，防止 cjs 产物中 require ESM 的产物，因为 react-router-dom 的产物为 ESM 格式
+          noExternal: ['react-router-dom']
+        },
         build: {
           ssr: isServer,
-          outDir: isServer ? '.temp' : 'build',
+          outDir: isServer ? join(root, '.temp') : join(root, 'build'),
           rollupOptions: {
             input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,
             output: {
@@ -77,12 +85,16 @@ async function renderPage(
   await fs.remove(join(root, '.temp'));
 }
 
-export default async function build(root: string) {
+export default async function build(root: string, config: SiteConfig) {
   // 打包 client 和 server 的 bundle 文件
-  const [clientBundle] = await bundle(root);
+  const [clientBundle] = await bundle(root, config);
   // 读取 server bundle 文件，获取 render 函数
   const serverEntryPath = join(root, '.temp', 'server-entry.js');
   const { render } = await import(serverEntryPath);
   // 生成 html 文件，将 client bundle 注入到 html 中，输出到 build 目录，完成打包
-  await renderPage(render, root, clientBundle);
+  try {
+    await renderPage(render, root, clientBundle);
+  } catch (err) {
+    console.error('Render page error.\n', err);
+  }
 }

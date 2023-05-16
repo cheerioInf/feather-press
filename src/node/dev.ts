@@ -4,6 +4,7 @@ import pluginReact from '@vitejs/plugin-react';
 import { PACKAGE_ROOT } from './constants';
 import { resolveConfig } from './config';
 import { pluginConfig } from './plugin-feather/config';
+import { pluginRoutes } from './plugin-routes';
 
 // 接收 root 参数，返回一个 vite 的 devServer
 export async function createDevServer(
@@ -14,11 +15,14 @@ export async function createDevServer(
   console.log(config);
   // 调用 vite 的 createServer 方法创建 deServer
   return createViteDevServer({
-    root,
+    root: PACKAGE_ROOT,
     plugins: [
       pluginIndexHtml(),
       pluginReact(),
-      pluginConfig(config, restartServer)
+      pluginConfig(config, restartServer),
+      pluginRoutes({
+        root: config.root
+      })
     ],
     server: {
       fs: {
