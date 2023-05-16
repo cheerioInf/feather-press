@@ -2,7 +2,12 @@ import { defineConfig } from 'tsup';
 
 export default defineConfig({
   // 指定入口文件，tsup 会根据入口文件的依赖关系，将所有依赖的文件打包到一起
-  entryPoints: ['src/node/cli.ts'],
+  entryPoints: {
+    cli: 'src/node/cli.ts',
+    index: 'src/node/index.ts',
+    dev: 'src/node/dev.ts'
+  },
+  clean: true,
   // bundle 为 true 时，tsup 会将所有依赖的文件打包到一起
   bundle: true,
   // splitting 为 true 时，tsup 会将所有依赖的文件分开打包，这样可以实现按需加载

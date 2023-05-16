@@ -12,6 +12,7 @@
     // 是否支持 jsx 语法，react-jsx 表示支持 react 的 jsx 语法
     "jsx": "react-jsx",
     // esModuleInterop 表示是否允许 import export 语法
-    "esModuleInterop": true
-  },
+    "esModuleInterop": true,
+    "baseUrl": "src"
+  }
 }
