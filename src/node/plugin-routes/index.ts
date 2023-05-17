@@ -1,8 +1,6 @@
 import { Plugin } from 'vite';
 import { RouteService } from './RouteService';
 
-// 本质: 把文件目录结构 -> 路由数据
-
 export interface Route {
   path: string;
   element: React.ReactElement;
@@ -29,7 +27,6 @@ export function pluginRoutes(options: PluginOptions): Plugin {
         return '\0' + id;
       }
     },
-
     load(id: string) {
       if (id === '\0' + CONVENTIONAL_ROUTE_ID) {
         return routeService.generateRoutesCode();

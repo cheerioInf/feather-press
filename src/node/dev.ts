@@ -11,8 +11,9 @@ export async function createDevServer(
   root = process.cwd(),
   restartServer: () => Promise<void>
 ) {
+  // 通过 resolveConfig 获取配置
   const config = await resolveConfig(root, 'serve', 'development');
-  console.log(config);
+  // console.log(config);
   // 调用 vite 的 createServer 方法创建 deServer
   return createViteDevServer({
     root: PACKAGE_ROOT,

@@ -13,6 +13,9 @@
     "jsx": "react-jsx",
     // esModuleInterop 表示是否允许 import export 语法
     "esModuleInterop": true,
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "paths": {
+      "@runtime": ["./runtime/index.ts"]
+    }
   }
 }

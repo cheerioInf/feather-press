@@ -5,7 +5,6 @@ declare module 'feather:site-data' {
 }
 
 declare module 'feather:routes' {
-  import { RouteObject } from 'react-router-dom';
-  const routes: RouteObject[];
-  export default routes;
+  import type { Route } from 'node/plugin-routes';
+  export const routes: Route[];
 }
