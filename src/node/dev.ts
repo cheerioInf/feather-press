@@ -1,10 +1,7 @@
 import { createServer as createViteDevServer } from 'vite';
-import pluginIndexHtml from './plugin-feather/indexHtml';
-import pluginReact from '@vitejs/plugin-react';
 import { PACKAGE_ROOT } from './constants';
 import { resolveConfig } from './config';
-import { pluginConfig } from './plugin-feather/config';
-import { pluginRoutes } from './plugin-routes';
+import { createVitePlugins } from './vitePlugins';
 
 // 接收 root 参数，返回一个 vite 的 devServer
 export async function createDevServer(
@@ -17,14 +14,7 @@ export async function createDevServer(
   // 调用 vite 的 createServer 方法创建 deServer
   return createViteDevServer({
     root: PACKAGE_ROOT,
-    plugins: [
-      pluginIndexHtml(),
-      pluginReact(),
-      pluginConfig(config, restartServer),
-      pluginRoutes({
-        root: config.root
-      })
-    ],
+    plugins: createVitePlugins(config, restartServer),
     server: {
       fs: {
         allow: [PACKAGE_ROOT]

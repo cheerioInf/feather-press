@@ -4,7 +4,7 @@ import { StaticRouter } from 'react-router-dom/server';
 
 export function render() {
   return renderToString(
-    <StaticRouter location={'/guide'}>
+    <StaticRouter location={'/hello'}>
       <App />
     </StaticRouter>
   );

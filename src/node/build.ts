@@ -4,8 +4,7 @@ import { join } from 'path';
 import fs from 'fs-extra';
 import type { RollupOutput } from 'rollup';
 import { SiteConfig } from '../shared/types/index';
-import pluginReact from '@vitejs/plugin-react';
-import { pluginConfig } from './plugin-feather/config';
+import { createVitePlugins } from './vitePlugins';
 
 // 打包 client 和 server 的 bundle 文件
 async function bundle(root: string, config: SiteConfig) {
@@ -15,7 +14,7 @@ async function bundle(root: string, config: SiteConfig) {
       return {
         mode: 'production',
         root,
-        plugins: [pluginReact(), pluginConfig(config)],
+        plugins: createVitePlugins(config),
         ssr: {
           // 注意加上这个配置，防止 cjs 产物中 require ESM 的产物，因为 react-router-dom 的产物为 ESM 格式
           noExternal: ['react-router-dom']
