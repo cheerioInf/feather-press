@@ -1,6 +1,6 @@
 import { Plugin } from 'vite';
 import { pluginMdxRollup } from './pluginMdxRollup';
 
-export function createPluginMdx(): Plugin[] {
-  return [pluginMdxRollup()] as unknown as Plugin[];
+export async function createPluginMdx(): Promise<Plugin[]> {
+  return [await pluginMdxRollup()] as unknown as Plugin[];
 }

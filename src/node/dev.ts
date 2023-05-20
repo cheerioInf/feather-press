@@ -14,7 +14,7 @@ export async function createDevServer(
   // 调用 vite 的 createServer 方法创建 deServer
   return createViteDevServer({
     root: PACKAGE_ROOT,
-    plugins: createVitePlugins(config, restartServer),
+    plugins: await createVitePlugins(config, restartServer),
     server: {
       fs: {
         allow: [PACKAGE_ROOT]

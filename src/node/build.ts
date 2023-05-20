@@ -10,11 +10,13 @@ import { createVitePlugins } from './vitePlugins';
 async function bundle(root: string, config: SiteConfig) {
   try {
     // 生成 vite config
-    const resolveViteConfig = (isServer: boolean): InlineConfig => {
+    const resolveViteConfig = async (
+      isServer: boolean
+    ): Promise<InlineConfig> => {
       return {
         mode: 'production',
         root,
-        plugins: createVitePlugins(config),
+        plugins: await createVitePlugins(config),
         ssr: {
           // 注意加上这个配置，防止 cjs 产物中 require ESM 的产物，因为 react-router-dom 的产物为 ESM 格式
           noExternal: ['react-router-dom']
@@ -33,11 +35,11 @@ async function bundle(root: string, config: SiteConfig) {
     };
 
     const clientBuild = async () => {
-      return viteBuild(resolveViteConfig(false));
+      return viteBuild(await resolveViteConfig(false));
     };
 
     const serverBuild = async () => {
-      return viteBuild(resolveViteConfig(true));
+      return viteBuild(await resolveViteConfig(true));
     };
 
     console.log('building client and server bundles...');

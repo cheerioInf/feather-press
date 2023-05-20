@@ -6,6 +6,7 @@ title: 'island'
 
 ```js
 const hello = 'world';
+hello.toUpperCase();
 ```
 
 # GFM
