@@ -15,5 +15,8 @@ export default defineConfig({
   // 将类型打包成 .d.ts 类型声明文件
   dts: true,
   // 开启兼容性处理，比如 __dirname 会被替换成 import.meta.url
-  shims: true
+  shims: true,
+  banner: {
+    js: 'import { createRequire as createRequire0 } from "module"; const require = createRequire0(import.meta.url);'
+  }
 });

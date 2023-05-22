@@ -1,9 +1,10 @@
 import { createRoot } from 'react-dom/client';
-import { App } from './App';
+import { App, initPageData } from './App';
 import { BrowserRouter } from 'react-router-dom';
 import siteData from 'feather:site-data';
+import { DataContext } from './hooks';
 
-function renderInBrowser() {
+async function renderInBrowser() {
   console.log(siteData);
   // 获取 root 元素
   const containerEl = document.getElementById('root');
@@ -11,11 +12,14 @@ function renderInBrowser() {
   if (!containerEl) {
     throw new Error('root element not found');
   }
+  const pageData = await initPageData(location.pathname);
   // 渲染
   createRoot(containerEl).render(
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <DataContext.Provider value={pageData}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </DataContext.Provider>
   );
 }
 
