@@ -1,0 +1,405 @@
+/**
+ * Headings
+ * -------------------------------------------------------------------------- */
+
+.feather-doc h1,
+.feather-doc h2,
+.feather-doc h3,
+.feather-doc h4,
+.feather-doc h5,
+.feather-doc h6 {
+  position: relative;
+  font-weight: 600;
+  outline: none;
+}
+
+.feather-doc h1 {
+  letter-spacing: -0.02em;
+  line-height: 40px;
+  font-size: 28px;
+  margin-bottom: 40px;
+}
+
+.feather-doc h2 {
+  margin: 48px 0 16px;
+  /* padding-top: 24px; */
+  letter-spacing: -0.02em;
+  line-height: 32px;
+  font-size: 24px;
+}
+
+.feather-doc h3 {
+  margin: 32px 0 0;
+  letter-spacing: -0.01em;
+  line-height: 28px;
+  font-size: 20px;
+}
+
+.feather-doc .header-anchor {
+  float: left;
+  margin-left: -0.87em;
+  padding-right: 0.23em;
+  font-weight: 500;
+  opacity: 0;
+  transition: color 0.25s, opacity 0.25s;
+}
+
+.feather-doc h1:hover .header-anchor,
+.feather-doc h1 .header-anchor:focus,
+.feather-doc h2:hover .header-anchor,
+.feather-doc h2 .header-anchor:focus,
+.feather-doc h3:hover .header-anchor,
+.feather-doc h3 .header-anchor:focus,
+.feather-doc h4:hover .header-anchor,
+.feather-doc h4 .header-anchor:focus,
+.feather-doc h5:hover .header-anchor,
+.feather-doc h5 .header-anchor:focus,
+.feather-doc h6:hover .header-anchor,
+.feather-doc h6 .header-anchor:focus {
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .feather-doc h1 {
+    letter-spacing: -0.02em;
+    line-height: 40px;
+    font-size: 32px;
+  }
+}
+
+/**
+    * Paragraph and inline elements
+    * -------------------------------------------------------------------------- */
+
+.feather-doc p,
+.feather-doc summary {
+  margin: 16px 0;
+}
+
+.feather-doc p {
+  z-index: 2;
+  line-height: 28px;
+}
+
+.feather-doc blockquote {
+  margin: 16px 0;
+  border-left: 2px solid var(--feather-c-divider);
+  padding-left: 16px;
+  transition: border-color 0.5s;
+}
+
+.feather-doc blockquote > p {
+  margin: 0;
+  font-size: 16px;
+  color: var(--feather-c-text-2);
+  transition: color 0.5s;
+}
+
+.feather-doc a {
+  font-weight: 500;
+  color: var(--feather-c-brand);
+  text-decoration-style: dotted;
+  transition: color 0.25s;
+}
+
+.feather-doc a:hover {
+  color: var(--feather-c-brand-dark);
+}
+
+.feather-doc strong {
+  font-weight: 600;
+}
+
+/**
+    * Lists
+    * -------------------------------------------------------------------------- */
+
+.feather-doc ul,
+.feather-doc ol {
+  padding-left: 1.25rem;
+  margin: 16px 0;
+}
+
+.feather-doc ul {
+  list-style: disc;
+}
+
+.feather-doc ol {
+  list-style: decimal;
+}
+
+.feather-doc li + li {
+  margin-top: 8px;
+}
+
+.feather-doc li > ol,
+.feather-doc li > ul {
+  margin: 8px 0 0;
+}
+
+/**
+    * Table
+    * -------------------------------------------------------------------------- */
+
+.feather-doc table {
+  display: block;
+  border-collapse: collapse;
+  margin: 20px 0;
+  overflow-x: auto;
+}
+
+.feather-doc tr {
+  border-top: 1px solid var(--feather-c-divider);
+  transition: background-color 0.5s;
+}
+
+.feather-doc tr:nth-child(2n) {
+  background-color: var(--feather-c-bg-soft);
+}
+
+.feather-doc th,
+.feather-doc td {
+  border: 1px solid var(--feather-c-divider);
+  padding: 12px 16px;
+}
+
+.feather-doc th {
+  font-size: 16px;
+  font-weight: 600;
+  background-color: var(--feather-c-white-soft);
+}
+
+.dark .feather-doc th {
+  background-color: var(--feather-c-black);
+}
+
+/**
+    * Decorational elements
+    * -------------------------------------------------------------------------- */
+
+.feather-doc hr {
+  margin: 16px 0;
+  border: none;
+  border-top: 1px solid var(--feather-c-divider-light);
+}
+
+/**
+    * Custom Block
+    * -------------------------------------------------------------------------- */
+
+.feather-doc .custom-block {
+  margin: 16px 0;
+}
+
+.feather-doc .custom-block p {
+  margin: 8px 0;
+  line-height: 24px;
+}
+
+.feather-doc .custom-block p:first-child {
+  margin: 0;
+}
+
+.feather-doc .custom-block a {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  transition: opacity 0.25s;
+}
+
+.feather-doc .custom-block a:hover {
+  opacity: 0.6;
+}
+
+.feather-doc .custom-block code {
+  font-size: var(--feather-custom-block-code-font-size);
+  font-weight: 700;
+  color: inherit;
+}
+
+.feather-doc .custom-block div[class*='language-'] {
+  margin: 8px 0;
+}
+
+.feather-doc .custom-block div[class*='language-'] code {
+  font-weight: 400;
+  background-color: transparent;
+}
+
+/**
+    * Code
+    * -------------------------------------------------------------------------- */
+
+/* inline code */
+.feather-doc :not(pre, h1, h2, h3, h4, h5, h6) > code {
+  font-size: var(--feather-code-font-size);
+}
+
+.feather-doc :not(pre, div) > code {
+  border-radius: 4px;
+  padding: 3px 6px;
+  color: var(--feather-c-text-code);
+  background-color: var(--feather-c-bg-mute);
+  transition: color 0.5s, background-color 0.5s;
+}
+
+.feather-doc h1 > code,
+.feather-doc h2 > code,
+.feather-doc h3 > code {
+  font-size: 0.9em;
+}
+
+.feather-doc a > code {
+  color: var(--feather-c-brand);
+  transition: color 0.25s;
+}
+
+.feather-doc a:hover > code {
+  color: var(--feather-c-brand-dark);
+}
+
+.feather-doc div[class*='language-'] {
+  position: relative;
+  margin: 16px -24px;
+  background-color: var(--feather-code-block-bg);
+  overflow-x: auto;
+  transition: background-color 0.5s;
+}
+
+@media (min-width: 640px) {
+  .feather-doc div[class*='language-'] {
+    border-radius: 8px;
+    margin: 16px 0;
+  }
+}
+
+@media (max-width: 639px) {
+  .feather-doc li div[class*='language-'] {
+    border-radius: 8px 0 0 8px;
+  }
+}
+
+.feather-doc div[class*='language-'] + div[class*='language-'],
+.feather-doc div[class$='-api'] + div[class*='language-'],
+.feather-doc
+  div[class*='language-']
+  + div[class$='-api']
+  > div[class*='language-'] {
+  margin-top: -8px;
+}
+
+.feather-doc [class*='language-'] pre,
+.feather-doc [class*='language-'] code {
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+.feather-doc [class*='language-'] pre {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 16px 0;
+  background: transparent;
+  overflow-x: auto;
+}
+
+.feather-doc [class*='language-'] code {
+  display: block;
+  padding: 0 24px;
+  width: fit-content;
+  min-width: 100%;
+  line-height: var(--feather-code-line-height);
+  font-size: var(--feather-code-font-size);
+  color: var(--feather-code-block-color);
+  transition: color 0.5s;
+}
+
+.feather-doc [class*='language-'] code .highlighted {
+  background-color: var(--feather-code-line-highlight-color);
+  transition: background-color 0.5s;
+  margin: 0 -24px;
+  padding: 0 24px;
+  width: calc(100% + 2 * 24px);
+  display: inline-block;
+}
+
+.feather-doc [class*='language-'] > button.copy {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 3;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+  background-color: var(--feather-code-block-bg);
+  opacity: 0;
+  cursor: pointer;
+  background-image: var(--feather-icon-copy);
+  background-position: 50%;
+  background-size: 20px;
+  background-repeat: no-repeat;
+  transition: opacity 0.4s;
+}
+
+.feather-doc [class*='language-']:hover > button.copy,
+.feather-doc [class*='language-'] > button.copy:focus {
+  opacity: 1;
+}
+
+.feather-doc [class*='language-'] > button.copy:hover {
+  background-color: var(--feather-code-copy-code-hover-bg);
+}
+
+.feather-doc [class*='language-'] > button.copy.copied,
+.feather-doc [class*='language-'] > button.copy:hover.copied {
+  border-radius: 0 4px 4px 0;
+  background-color: var(--feather-code-copy-code-hover-bg);
+  background-image: var(--feather-icon-copied);
+}
+
+.feather-doc [class*='language-'] > button.copy.copied::before,
+.feather-doc [class*='language-'] > button.copy:hover.copied::before {
+  position: relative;
+  left: -65px;
+  display: block;
+  border-radius: 4px 0 0 4px;
+  padding-top: 8px;
+  width: 64px;
+  height: 40px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--feather-code-copy-code-active-text);
+  background-color: var(--feather-code-copy-code-hover-bg);
+  white-space: nowrap;
+  content: 'Copied';
+}
+
+.feather-doc [class*='language-'] > span.lang {
+  position: absolute;
+  top: 6px;
+  right: 12px;
+  z-index: 2;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--feather-c-text-dark-3);
+  transition: color 0.4s, opacity 0.4s;
+}
+
+.feather-doc [class*='language-']:hover > button.copy + span.lang,
+.feather-doc [class*='language-'] > button.copy:focus + span.lang {
+  opacity: 0;
+}

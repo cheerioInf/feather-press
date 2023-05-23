@@ -28,4 +28,5 @@
     32px,
     calc(32px + (100vw - var(--feather-layout-max-width)) / 2)
   );
+  background-color: var(--feather-c-bg);
 }
