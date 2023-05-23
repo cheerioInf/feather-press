@@ -53,7 +53,7 @@ export async function resolveUserConfig(
 // 在用户没有配置时使用默认值
 export function resolveSiteData(userConfig: UserConfig): UserConfig {
   return {
-    title: userConfig.title || 'Island.js',
+    title: userConfig.title || 'feather.js',
     description: userConfig.description || 'SSG Framework',
     themeConfig: userConfig.themeConfig || {},
     vite: userConfig.vite || {}

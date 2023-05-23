@@ -30,7 +30,7 @@ export function Nav() {
             hover="opacity-60"
             className="w-full h-full text-1rem font-semibold flex items-center"
           >
-            Island.js
+            feather.js
           </a>
         </div>
         <div flex="~">
