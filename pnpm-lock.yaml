@@ -82,6 +82,9 @@ dependencies:
   shiki:
     specifier: ^0.14.2
     version: registry.npmmirror.com/shiki@0.14.2
+  sirv:
+    specifier: ^2.0.3
+    version: registry.npmmirror.com/sirv@2.0.3
   unified:
     specifier: ^10.1.2
     version: registry.npmmirror.com/unified@10.1.2

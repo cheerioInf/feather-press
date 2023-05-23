@@ -82,6 +82,7 @@
     "remark-rehype": "^10.1.0",
     "remark-stringify": "^10.0.3",
     "shiki": "^0.14.2",
+    "sirv": "^2.0.3",
     "unified": "^10.1.2",
     "unocss": "^0.52.0",
     "vite": "^3.2.1"
