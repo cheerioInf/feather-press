@@ -6,8 +6,6 @@ import type { MdxjsEsm } from 'mdast-util-mdxjs-esm';
 import { parse } from 'acorn';
 import { Program } from 'mdast-util-mdxjs-esm/lib';
 
-const slugger = new Slugger();
-
 interface TocItem {
   id: string;
   text: string;
@@ -23,6 +21,7 @@ interface ChildNode {
 export const remarkPluginToc: Plugin<[], Root> = () => {
   return (tree) => {
     const toc: TocItem[] = [];
+    const slugger = new Slugger();
     visit(tree, 'heading', (node) => {
       // 如果 node 的 depth 不存在，或者 node 没有 children，直接返回
       if (!node.depth || !node.children) {

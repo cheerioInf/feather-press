@@ -1,12 +1,18 @@
-import { App } from './App';
+import { App, initPageData } from './App';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
+import { DataContext } from './hooks';
 
-export function render(pagePath: string) {
+export async function render(pagePath: string) {
+  // 生产 pageData
+  const pageData = await initPageData(pagePath);
+
   return renderToString(
-    <StaticRouter location={pagePath}>
-      <App />
-    </StaticRouter>
+    <DataContext.Provider value={pageData}>
+      <StaticRouter location={pagePath}>
+        <App />
+      </StaticRouter>
+    </DataContext.Provider>
   );
 }
 
