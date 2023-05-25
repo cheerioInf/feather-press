@@ -9,7 +9,7 @@ export function useHeaders(initHeaders: Header[]) {
       import.meta.hot.on(
         'mdx-changed',
         ({ filePath }: { filePath: string }) => {
-          import(/* @vite-ignore */ `${filePath}?import&t=${Date.now()}`).then(
+          import(`/* @vite-ignore */${filePath}?import&t=${Date.now()}`).then(
             (module) => {
               setHeaders(module.toc);
             }
