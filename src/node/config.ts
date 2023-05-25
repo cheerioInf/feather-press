@@ -1,21 +1,26 @@
 import { loadConfigFromFile } from 'vite';
 import { SiteConfig, UserConfig } from '../shared/types/index';
 import { resolve } from 'path';
-import fs from 'fs-extra';
+import { pathExistsSync } from 'fs-extra';
 
+// 初次解析配置文件时, 可能会返回三种类型的配置
 type RawConfig =
   | UserConfig
   | Promise<UserConfig>
   | (() => UserConfig | Promise<UserConfig>);
 
-// 从 root 目录下找到第一个存在的配置文件
+/**
+ * 获取用户配置文件路径
+ * @param root 项目根目录
+ * @returns 配置文件路径
+ */
 function getUserConfigPath(root: string) {
   try {
     const supportConfigFiles = ['config.ts', 'config.js'];
-    // fs.pathExistsSync 判断文件是否存在
+    // pathExistsSync 判断文件是否存在
     const configPath = supportConfigFiles
       .map((file) => resolve(root, file))
-      .find(fs.pathExistsSync);
+      .find(pathExistsSync);
     return configPath;
   } catch (e) {
     console.error(`Failed to load user config: ${e}`);
@@ -23,15 +28,20 @@ function getUserConfigPath(root: string) {
   }
 }
 
-// 解析用户配置文件
+/**
+ * 解析用户配置文件
+ * @param root 项目根目录
+ * @param command 环境变量
+ * @param mode 开发模式
+ * @returns [配置文件路径, 用户配置]
+ */
 export async function resolveUserConfig(
   root: string,
   command: 'serve' | 'build',
   mode: 'development' | 'production'
 ) {
-  // 1. 获取配置文件路径，支持 js、ts 格式
   const configPath = getUserConfigPath(root);
-  // 2. 解析配置文件
+  // 解析配置文件
   const result = await loadConfigFromFile({ command, mode }, configPath, root);
 
   if (result) {
@@ -50,7 +60,11 @@ export async function resolveUserConfig(
   }
 }
 
-// 在用户没有配置时使用默认值
+/**
+ * 在用户没有配置时使用默认值
+ * @param userConfig 用户配置
+ * @returns 默认配置
+ */
 export function resolveSiteData(userConfig: UserConfig): UserConfig {
   return {
     title: userConfig.title || 'feather.js',
@@ -60,6 +74,13 @@ export function resolveSiteData(userConfig: UserConfig): UserConfig {
   };
 }
 
+/**
+ * 解析配置文件主函数
+ * @param root 解析根目录
+ * @param command 环境变量
+ * @param mode 开发模式
+ * @returns 配置文件
+ */
 export async function resolveConfig(
   root: string,
   command: 'serve' | 'build',

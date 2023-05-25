@@ -2,16 +2,17 @@ import { readFile } from 'fs/promises';
 import { Plugin } from 'vite';
 import { CLIENT_ENTRY_PATH, DEFAULT_HTML_PATH } from '../constants';
 
+/**
+ * 将 template.html 作为 index.html
+ * @returns vite 插件
+ */
 export default function pluginIndexHtml(): Plugin {
   return {
     name: 'feather:index-html',
     apply: 'serve',
-    // configureServer 的作用是在 devServer 启动之前对其进行配置
+    // 注入在内部中间件之后运行的中间件
     configureServer(server) {
       return () => {
-        // server.middlewares.use 的作用是添加一个中间件
-        // 这里的中间件是一个 async 函数，内部的读取文件是一个异步操作
-        // 接收三个参数，分别是：
         // req: http 请求
         // res: http 响应
         // next: express 的 next 函数
@@ -20,32 +21,26 @@ export default function pluginIndexHtml(): Plugin {
           let html = await readFile(DEFAULT_HTML_PATH, 'utf-8');
 
           try {
-            // 接入热更新
+            // 接入热更新，transformIndexHtml 为转换 index.html 的专用钩子
             html = await server.transformIndexHtml(
               req.url,
               html,
               req.originalUrl
             );
+
             res.statusCode = 200;
             res.setHeader('Content-Type', 'text/html');
             res.end(html);
           } catch (e) {
             // 捕获错误
-            // 这里的 next 是 express 的 next，作用是将错误传递给下一个中间件
+            // 将错误传递给下一个中间件
             return next(e);
           }
         });
       };
     },
-    // transformIndexHtml 的作用是修改 index.html
-    // 接收一个参数，即 index.html 的内容
-    // 返回一个对象，包含两个属性：
-    // html: string，即 index.html 的内容
-    // tags: Array，即需要插入到 index.html 的标签
-    // 这里的标签是一个对象，包含三个属性：
-    // tag: string，即标签名
-    // attrs: Record<string, string>，即标签的属性
-    // injectTo: string，即标签的插入位置
+    // 转换 index.html 的专用钩子
+    // 自动添加 ssg 同构脚本
     transformIndexHtml(html) {
       return {
         html,
