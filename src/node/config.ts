@@ -1,7 +1,7 @@
 import { loadConfigFromFile } from 'vite';
 import { SiteConfig, UserConfig } from '../shared/types/index';
 import { resolve } from 'path';
-import { pathExistsSync } from 'fs-extra';
+import fs from 'fs-extra';
 
 // 初次解析配置文件时, 可能会返回三种类型的配置
 type RawConfig =
@@ -17,10 +17,10 @@ type RawConfig =
 function getUserConfigPath(root: string) {
   try {
     const supportConfigFiles = ['config.ts', 'config.js'];
-    // pathExistsSync 判断文件是否存在
+    // fs.pathExistsSync 判断文件是否存在
     const configPath = supportConfigFiles
       .map((file) => resolve(root, file))
-      .find(pathExistsSync);
+      .find(fs.pathExistsSync);
     return configPath;
   } catch (e) {
     console.error(`Failed to load user config: ${e}`);
