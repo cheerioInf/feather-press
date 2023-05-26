@@ -1,7 +1,7 @@
 // fast-glob: 快速扫描文件
 import fastGlob from 'fast-glob';
 import { normalizePath } from 'vite';
-import path from 'path';
+import { relative } from 'path';
 
 interface RouteMeta {
   routePath: string;
@@ -30,9 +30,7 @@ export class RouteService {
       .sort();
     files.forEach((file) => {
       // 1. 路由路径
-      const fileRelativePath = normalizePath(
-        path.relative(this.#scanDir, file)
-      );
+      const fileRelativePath = normalizePath(relative(this.#scanDir, file));
       const routePath = this.normalizeRoutePath(fileRelativePath);
       // 2. 文件绝对路径
       this.#routeData.push({
@@ -42,7 +40,7 @@ export class RouteService {
     });
   }
 
-  // 获取路由数据，方便测试
+  // 获取路由数据
   getRouteMeta(): RouteMeta[] {
     return this.#routeData;
   }

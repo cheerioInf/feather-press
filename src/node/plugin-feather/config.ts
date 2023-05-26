@@ -1,6 +1,6 @@
 import { Plugin } from 'vite';
 import { SiteConfig } from 'shared/types/index';
-import path, { join, relative } from 'path';
+import { join, relative } from 'path';
 import { PACKAGE_ROOT } from 'node/constants';
 import sirv from 'sirv';
 import fs from 'fs-extra';
@@ -54,7 +54,7 @@ export function pluginConfig(
       }
     },
     configureServer(server) {
-      const publicDir = path.join(config.root, 'public');
+      const publicDir = join(config.root, 'public');
       if (fs.pathExistsSync(publicDir)) {
         server.middlewares.use(sirv(publicDir));
       }
