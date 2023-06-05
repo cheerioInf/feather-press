@@ -14,3 +14,5 @@ export const CLIENT_ENTRY_PATH = join(RUNTIME_PATH, 'client-entry.tsx');
 
 // SERVER_ENTRY_PATH 是指项目根目录下的 src/runtime/server-entry.tsx
 export const SERVER_ENTRY_PATH = join(RUNTIME_PATH, 'server-entry.tsx');
+
+export const MASK_SPLITTER = '!!ISLAND!!';
