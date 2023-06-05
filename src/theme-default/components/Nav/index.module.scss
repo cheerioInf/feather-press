@@ -1,24 +1,3 @@
-.link:hover {
-  color: var(--feather-c-brand);
-  transition: color 0.2s;
-}
-
-.link {
-  display: block;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.social-link-icon {
-  display: flex;
-  fill: currentColor;
-  transition: color 0.2s;
-  color: var(--feather-c-text-2);
-  &:hover {
-    color: var(--feather-c-text-1);
-  }
-}
-
 .nav {
   padding-left: max(
     32px,
@@ -29,4 +8,14 @@
     calc(32px + (100vw - var(--feather-layout-max-width)) / 2)
   );
   background-color: var(--feather-c-bg);
+}
+
+.social-link-icon {
+  display: flex;
+  fill: currentColor;
+  transition: color 0.2s;
+  color: var(--feather-c-text-2);
+  &:hover {
+    color: var(--feather-c-text-1);
+  }
 }

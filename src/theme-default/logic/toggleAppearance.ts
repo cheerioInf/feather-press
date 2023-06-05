@@ -14,8 +14,10 @@ const updateAppearance = () => {
   setClassList(userPreference === 'dark');
 };
 
+// ssr 跳过
 if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
   updateAppearance();
+  // 多标签页状态同步
   window.addEventListener('storage', updateAppearance);
 }
 

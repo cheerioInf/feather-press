@@ -1,12 +1,13 @@
 import { defineConfig } from '../dist/index.mjs';
 
 export default defineConfig({
-  title: 'xxx',
+  title: 'FeatherPress',
   themeConfig: {
     nav: [
       { text: '主页', link: '/' },
       { text: '指南', link: '/guide/' }
     ],
+    githubLink: 'https://github.com/cheerioInf/feather-press',
     // 新增 sidebar 的内容
     sidebar: {
       '/guide/': [

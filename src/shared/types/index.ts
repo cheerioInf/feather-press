@@ -23,6 +23,7 @@ export interface ThemeConfig {
   nav?: NavItemWithLink[];
   sidebar?: Sidebar;
   footer?: Footer;
+  githubLink?: string;
 }
 
 export interface Footer {

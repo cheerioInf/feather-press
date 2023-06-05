@@ -1,5 +1,4 @@
 import styles from './index.module.scss';
-// 逻辑部分待补充
 import { toggle } from '../../logic/toggleAppearance';
 
 interface SwitchProps {

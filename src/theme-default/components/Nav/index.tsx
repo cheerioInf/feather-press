@@ -1,21 +1,23 @@
+import { e } from 'unocss';
 import { SwitchAppearance } from '../SwitchAppearance';
+import { MenuItem } from './MenuItem';
 import styles from './index.module.scss';
-import { NavItemWithLink } from 'shared/types';
 import { usePageData } from '@runtime';
-
-export function MenuItem(item: NavItemWithLink) {
-  return (
-    <div className="text-sm font-medium mx-3">
-      <a href={item.link} className={styles.link}>
-        {item.text}
-      </a>
-    </div>
-  );
-}
 
 export function Nav() {
   const { siteData } = usePageData();
   const nav = siteData.themeConfig.nav || [];
+  const title = siteData.title || 'Feather.js';
+  const githubLink = siteData.themeConfig.githubLink || '#';
+
+  const jurgeIcon = (text: string) => {
+    if (text === 'github') {
+      return 'github';
+    } else if (text === 'twitter') {
+      return 'twitter';
+    }
+  };
+
   return (
     <header fixed="~" pos="t-0 l-0" w="full" z="10">
       <div
@@ -30,7 +32,7 @@ export function Nav() {
             hover="opacity-60"
             className="w-full h-full text-1rem font-semibold flex items-center"
           >
-            feather.js
+            {title}
           </a>
         </div>
         <div flex="~">
@@ -40,16 +42,18 @@ export function Nav() {
               <MenuItem {...item} key={item.text} />
             ))}
           </div>
+          {/* 深色模式 */}
           <div before="menu-item-before" flex="~">
             <SwitchAppearance />
           </div>
+          {/* 外部链接 */}
           <div
             className={styles.socialLinkIcon}
             before="menu-item-before"
             ml="2"
           >
-            <a href="/">
-              <div className="i-carbon-logo-github w-5 h-5 fill-current"></div>
+            <a target="blank" href={githubLink} className="flex items-center">
+              <div className="i-carbon-logo-github w-6 h-6 fill-current"></div>
             </a>
           </div>
         </div>

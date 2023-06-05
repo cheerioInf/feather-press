@@ -7,6 +7,9 @@ import fs from 'fs-extra';
 
 const SITE_DATA_ID = 'feather:site-data';
 
+/**
+ * 获取路由信息
+ */
 export function pluginConfig(
   config: SiteConfig,
   restartServer?: () => Promise<void>
