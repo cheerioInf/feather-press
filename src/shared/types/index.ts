@@ -98,3 +98,7 @@ export interface Hero {
     theme: 'brand' | 'alt';
   }[];
 }
+
+export type PropsWithIsland = {
+  __island?: boolean;
+};

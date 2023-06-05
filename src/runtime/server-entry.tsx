@@ -6,14 +6,23 @@ import { DataContext } from './hooks';
 export async function render(pagePath: string) {
   // 生产 pageData
   const pageData = await initPageData(pagePath);
+  const { clearIslandData, data } = await import('./jsx-runtime');
+  const { islandProps, islandToPathMap } = data;
+  clearIslandData();
 
-  return renderToString(
+  const appHtml = renderToString(
     <DataContext.Provider value={pageData}>
       <StaticRouter location={pagePath}>
         <App />
       </StaticRouter>
     </DataContext.Provider>
   );
+
+  return {
+    appHtml,
+    islandProps,
+    islandToPathMap
+  };
 }
 
 export { routes } from 'feather:routes';

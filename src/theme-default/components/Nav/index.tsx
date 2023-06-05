@@ -10,14 +10,6 @@ export function Nav() {
   const title = siteData.title || 'Feather.js';
   const githubLink = siteData.themeConfig.githubLink || '#';
 
-  const jurgeIcon = (text: string) => {
-    if (text === 'github') {
-      return 'github';
-    } else if (text === 'twitter') {
-      return 'twitter';
-    }
-  };
-
   return (
     <header fixed="~" pos="t-0 l-0" w="full" z="10">
       <div
@@ -39,7 +31,7 @@ export function Nav() {
           {/* 普通菜单 */}
           <div flex="~">
             {nav.map((item) => (
-              <MenuItem {...item} key={item.text} />
+              <MenuItem item={item} key={item.text} />
             ))}
           </div>
           {/* 深色模式 */}

@@ -6,6 +6,9 @@ import { pluginRoutes } from './plugin-routes';
 import { createPluginMdx } from './plugin-mdx';
 import unocssOptions from './unocssOptions';
 import { SiteConfig } from 'shared/types';
+import path from 'path';
+import { PACKAGE_ROOT } from './constants';
+import babelPluginIsland from './babel-plugin-island';
 
 /**
  * 返回 vite 插件
@@ -23,7 +26,13 @@ export async function createVitePlugins(
     pluginUnocss(unocssOptions),
     pluginIndexHtml(),
     pluginReact({
-      jsxRuntime: 'automatic'
+      jsxRuntime: 'automatic',
+      jsxImportSource: isSSR
+        ? path.join(PACKAGE_ROOT, 'src', 'runtime')
+        : 'react',
+      babel: {
+        plugins: [babelPluginIsland]
+      }
     }),
     pluginConfig(config, restartServer),
     pluginRoutes({
