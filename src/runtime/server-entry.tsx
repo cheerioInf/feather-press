@@ -3,6 +3,12 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
 import { DataContext } from './hooks';
 
+export interface RenderResult {
+  appHtml: string;
+  propsData: unknown[];
+  islandToPathMap: Record<string, string>;
+}
+
 export async function render(pagePath: string) {
   // 生产 pageData
   const pageData = await initPageData(pagePath);
