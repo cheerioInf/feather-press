@@ -168,7 +168,12 @@ export async function renderPage(
 
   // 遍历路由数组，生成同构 html 文件
   await Promise.all(
-    routes.map(async (route) => {
+    [
+      ...routes,
+      {
+        path: '/404'
+      }
+    ].map(async (route) => {
       const routePath = route.path;
       const helmetContext = {
         context: {}

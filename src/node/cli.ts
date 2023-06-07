@@ -2,6 +2,7 @@ import { resolve } from 'path';
 import { cac } from 'cac';
 import build from './build';
 import { resolveConfig } from './config';
+import { preview } from './preview';
 
 // 从 package.json 中获取版本号
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -47,6 +48,18 @@ cli
       await build(root, config);
     } catch (e) {
       console.error(e);
+    }
+  });
+
+cli
+  .command('preview [root]', 'preview production build')
+  .option('--port <port>', 'port to use for preview server')
+  .action(async (root: string, { port }: { port: number }) => {
+    try {
+      root = resolve(root);
+      await preview(root, { port });
+    } catch (e) {
+      console.log(e);
     }
   });
 
