@@ -14,6 +14,7 @@ import { createVitePlugins } from './vitePlugins';
 import { Route } from './plugin-routes';
 import { SiteConfig } from '../shared/types/index';
 import { RenderResult } from 'runtime/server-entry';
+import { HelmetData } from 'react-helmet-async';
 
 /**
  * 打包 client 和 server 的 bundle 文件
@@ -89,7 +90,7 @@ async function bundle(root: string, config: SiteConfig) {
  * @param clientBundle client bundle
  */
 export async function renderPage(
-  render: (url: string) => RenderResult,
+  render: (url: string, helmetContext: object) => RenderResult,
   routes: Route[],
   root: string,
   clientBundle: RollupOutput
@@ -169,11 +170,14 @@ export async function renderPage(
   await Promise.all(
     routes.map(async (route) => {
       const routePath = route.path;
+      const helmetContext = {
+        context: {}
+      } as HelmetData;
       const {
         appHtml,
         islandToPathMap,
         islandProps = []
-      } = await render(routePath);
+      } = await render(routePath, helmetContext.context);
       const styleAssets = clientBundle.output.filter(
         (chunk) => chunk.type === 'asset' && chunk.fileName.endsWith('.css')
       );
@@ -181,13 +185,17 @@ export async function renderPage(
       const islandsCode = (islandBundle as RollupOutput).output[0].code;
       const normalizeVendorFilename = (fileName: string) =>
         fileName.replace(/\//g, '_') + '.js';
+      const { helmet } = helmetContext.context;
       const html = `
         <!DOCTYPE html>
         <html>
           <head>
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width,initial-scale=1">
-            <title>title</title>
+            ${helmet?.title?.toString() || ''}
+            ${helmet?.meta?.toString() || ''}
+            ${helmet?.link?.toString() || ''}
+            ${helmet?.style?.toString() || ''}
             <meta name="description" content="xxx">
             ${styleAssets
               .map((item) => `<link rel="stylesheet" href="/${item.fileName}">`)
@@ -222,7 +230,7 @@ export async function renderPage(
   );
 
   // 删除 .temp 目录
-  await fs.remove(join(root, '.temp'));
+  // await fs.remove(join(root, '.temp'));
 }
 
 /**
