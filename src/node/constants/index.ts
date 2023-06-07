@@ -16,3 +16,12 @@ export const CLIENT_ENTRY_PATH = join(RUNTIME_PATH, 'client-entry.tsx');
 export const SERVER_ENTRY_PATH = join(RUNTIME_PATH, 'server-entry.tsx');
 
 export const MASK_SPLITTER = '!!ISLAND!!';
+
+export const CLIENT_OUTPUT = 'build';
+
+export const EXTERNALS = [
+  'react',
+  'react-dom',
+  'react-dom/client',
+  'react/jsx-runtime'
+];

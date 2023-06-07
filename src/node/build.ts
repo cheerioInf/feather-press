@@ -1,7 +1,10 @@
 import { InlineConfig, build as viteBuild } from 'vite';
 import {
   CLIENT_ENTRY_PATH,
+  CLIENT_OUTPUT,
+  EXTERNALS,
   MASK_SPLITTER,
+  PACKAGE_ROOT,
   SERVER_ENTRY_PATH
 } from './constants';
 import path, { dirname, join } from 'path';
@@ -43,7 +46,8 @@ async function bundle(root: string, config: SiteConfig) {
             input: isServer ? SERVER_ENTRY_PATH : CLIENT_ENTRY_PATH,
             output: {
               format: isServer ? 'cjs' : 'esm'
-            }
+            },
+            external: EXTERNALS
           }
         }
       };
@@ -63,6 +67,14 @@ async function bundle(root: string, config: SiteConfig) {
       clientBuild(),
       serverBuild()
     ]);
+
+    const publicDir = join(root, 'public');
+    if (fs.pathExistsSync(publicDir)) {
+      await fs.copy(publicDir, join(root, CLIENT_OUTPUT));
+    }
+
+    await fs.copy(join(PACKAGE_ROOT, 'vendors'), join(root, CLIENT_OUTPUT));
+
     return [clientBundle, serverBundle] as [RollupOutput, RollupOutput];
   } catch (err) {
     console.error(err);
@@ -109,11 +121,15 @@ export async function renderPage(
     const injectId = 'island:inject';
     return viteBuild({
       mode: 'production',
+      esbuild: {
+        jsx: 'automatic'
+      },
       build: {
         // 输出目录
         outDir: path.join(root, '.temp'),
         rollupOptions: {
-          input: injectId
+          input: injectId,
+          external: EXTERNALS
         }
       },
       plugins: [
@@ -153,8 +169,18 @@ export async function renderPage(
   await Promise.all(
     routes.map(async (route) => {
       const routePath = route.path;
-      const { appHtml, islandToPathMap, propsData } = await render(routePath);
-      await buildIslands(root, islandToPathMap);
+      const {
+        appHtml,
+        islandToPathMap,
+        islandProps = []
+      } = await render(routePath);
+      const styleAssets = clientBundle.output.filter(
+        (chunk) => chunk.type === 'asset' && chunk.fileName.endsWith('.css')
+      );
+      const islandBundle = await buildIslands(root, islandToPathMap);
+      const islandsCode = (islandBundle as RollupOutput).output[0].code;
+      const normalizeVendorFilename = (fileName: string) =>
+        fileName.replace(/\//g, '_') + '.js';
       const html = `
         <!DOCTYPE html>
         <html>
@@ -163,10 +189,24 @@ export async function renderPage(
             <meta name="viewport" content="width=device-width,initial-scale=1">
             <title>title</title>
             <meta name="description" content="xxx">
+            ${styleAssets
+              .map((item) => `<link rel="stylesheet" href="/${item.fileName}">`)
+              .join('\n')}
           </head>
           <body>
             <div id="root">${appHtml}</div>
+            <script type="importmap">
+              {
+                "imports": {
+                  ${EXTERNALS.map(
+                    (name) => `"${name}": "/${normalizeVendorFilename(name)}"`
+                  ).join(',')}
+                }
+              }
+            </script>
+            <script type="module">${islandsCode}</script>
             <script type="module" src="/${clientChunk?.fileName}"></script>
+            <script id="island-props">${JSON.stringify(islandProps)}</script>
           </body>
         </html>`.trim();
 
@@ -182,7 +222,7 @@ export async function renderPage(
   );
 
   // 删除 .temp 目录
-  // await fs.remove(join(root, '.temp'));
+  await fs.remove(join(root, '.temp'));
 }
 
 /**
