@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prepare": "husky install",
-    "start": "tsup --watch",
+    "dev": "tsup --watch",
     "build": "tsup && pnpm build:deps",
     "build:deps": "tsx ./scripts/prebundle.ts",
     "lint": "npx --no -- lint-staged",

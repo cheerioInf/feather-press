@@ -235,7 +235,7 @@ export async function renderPage(
   );
 
   // 删除 .temp 目录
-  // await fs.remove(join(root, '.temp'));
+  await fs.remove(join(root, '.temp'));
 }
 
 /**
