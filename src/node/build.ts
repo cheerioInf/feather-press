@@ -90,7 +90,7 @@ async function bundle(root: string, config: SiteConfig) {
  * @param clientBundle client bundle
  */
 export async function renderPage(
-  render: (url: string, helmetContext: object) => RenderResult,
+  render: (url: string, helmetContext: object) => Promise<RenderResult>,
   routes: Route[],
   root: string,
   clientBundle: RollupOutput
