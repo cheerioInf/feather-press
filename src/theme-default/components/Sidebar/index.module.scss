@@ -3,47 +3,46 @@
   top: 0;
   bottom: 0;
   left: 0;
-  z-index: var(--feather-z-index-sidebar);
-  padding: 32px 32px 96px;
   width: calc(100vw - 64px);
   max-width: 320px;
-  background-color: var(--feather-c-bg);
-  opacity: 0;
-  box-shadow: var(--feather-c-shadow-3);
+  padding: 32px 32px 96px;
   overflow-x: hidden;
   overflow-y: auto;
-  transform: translateX(-100%);
+  background-color: var(--feather-c-bg-feature);
+  box-shadow: var(--feather-shadow-2);
+  opacity: 0;
   transition: opacity 0.5s, transform 0.25s ease;
+  transform: translateX(-100%);
 }
 
 :global(.dark) .sidebar {
-  box-shadow: var(--feather-shadow-1);
+  box-shadow: var(--feather-shadow-2);
 }
 
-@media (min-width: 960px) {
+@media (width >= 960px) {
   .sidebar {
     z-index: 1;
-    padding-top: var(--feather-nav-height);
-    padding-bottom: 128px;
     width: var(--feather-sidebar-width);
     max-width: 100%;
-    background-color: var(--feather-c-bg-alt);
-    opacity: 1;
+    padding-top: var(--feather-nav-height);
+    padding-bottom: 128px;
     visibility: visible;
+    background-color: var(--feather-c-bg);
     box-shadow: none;
+    opacity: 1;
     transform: translateX(0);
   }
 }
 
-@media (min-width: 1440px) {
+$temp1: var(--feather-sidebar-width);
+$temp2: ((100% - var(--feather-layout-max-width)) / 2);
+
+@media (width >= 1440px) {
   .sidebar {
+    width: (calc($temp1 + $temp2));
     padding-left: max(
       32px,
       calc(32px + (100% - var(--feather-layout-max-width)) / 2)
-    );
-    width: calc(
-      var(--feather-sidebar-width) +
-        ((100% - var(--feather-layout-max-width)) / 2)
     );
   }
 }

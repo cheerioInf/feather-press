@@ -36,6 +36,7 @@
   --feather-nav-height: 56px;
   --feather-layout-max-width: 1440px;
   --feather-sidebar-width: 272px;
+  --feather-aside-width: 268px;
 }
 
 :root {
@@ -56,6 +57,11 @@
     sans-serif;
   --feather-font-family-mono: 'Menlo', 'Monaco', 'Consolas', 'Courier New',
     monospace;
+}
+
+:root {
+  --feather-code-line-height: 1.7;
+  --feather-code-font-size: 0.875em;
 }
 
 .dark {

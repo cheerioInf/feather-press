@@ -1,7 +1,7 @@
-/**
- * Headings
- * -------------------------------------------------------------------------- */
-
+/* stylelint-disable property-no-vendor-prefix */
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable media-feature-range-notation */
+/* stylelint-disable order/properties-order */
 .feather-doc h1,
 .feather-doc h2,
 .feather-doc h3,
@@ -22,7 +22,6 @@
 
 .feather-doc h2 {
   margin: 48px 0 16px;
-  /* padding-top: 24px; */
   letter-spacing: -0.02em;
   line-height: 32px;
   font-size: 24px;
@@ -67,10 +66,6 @@
   }
 }
 
-/**
-    * Paragraph and inline elements
-    * -------------------------------------------------------------------------- */
-
 .feather-doc p,
 .feather-doc summary {
   margin: 16px 0;
@@ -83,7 +78,7 @@
 
 .feather-doc blockquote {
   margin: 16px 0;
-  border-left: 2px solid var(--feather-c-divider);
+  border-left: 2px solid var(--feather-c-border);
   padding-left: 16px;
   transition: border-color 0.5s;
 }
@@ -91,28 +86,24 @@
 .feather-doc blockquote > p {
   margin: 0;
   font-size: 16px;
-  color: var(--feather-c-text-2);
+  color: var(--feather-c-text-1);
   transition: color 0.5s;
 }
 
 .feather-doc a {
   font-weight: 500;
-  color: var(--feather-c-brand);
+  color: var(--feather-c-theme-1);
   text-decoration-style: dotted;
   transition: color 0.25s;
 }
 
 .feather-doc a:hover {
-  color: var(--feather-c-brand-dark);
+  color: var(--feather-c-theme-1);
 }
 
 .feather-doc strong {
   font-weight: 600;
 }
-
-/**
-    * Lists
-    * -------------------------------------------------------------------------- */
 
 .feather-doc ul,
 .feather-doc ol {
@@ -137,10 +128,6 @@
   margin: 8px 0 0;
 }
 
-/**
-    * Table
-    * -------------------------------------------------------------------------- */
-
 .feather-doc table {
   display: block;
   border-collapse: collapse;
@@ -149,43 +136,35 @@
 }
 
 .feather-doc tr {
-  border-top: 1px solid var(--feather-c-divider);
+  border-top: 1px solid var(--feather-c-border);
   transition: background-color 0.5s;
 }
 
 .feather-doc tr:nth-child(2n) {
-  background-color: var(--feather-c-bg-soft);
+  background-color: var(--feather-c-bg-feature);
 }
 
 .feather-doc th,
 .feather-doc td {
-  border: 1px solid var(--feather-c-divider);
+  border: 1px solid var(--feather-c-border);
   padding: 12px 16px;
 }
 
 .feather-doc th {
   font-size: 16px;
   font-weight: 600;
-  background-color: var(--feather-c-white-soft);
+  background-color: var(--feather-c-white-2);
 }
 
 .dark .feather-doc th {
-  background-color: var(--feather-c-black);
+  background-color: var(--feather-c-black-2);
 }
-
-/**
-    * Decorational elements
-    * -------------------------------------------------------------------------- */
 
 .feather-doc hr {
   margin: 16px 0;
   border: none;
-  border-top: 1px solid var(--feather-c-divider-light);
+  border-top: 1px solid var(--feather-c-border);
 }
-
-/**
-    * Custom Block
-    * -------------------------------------------------------------------------- */
 
 .feather-doc .custom-block {
   margin: 16px 0;
@@ -226,20 +205,17 @@
   background-color: transparent;
 }
 
-/**
-    * Code
-    * -------------------------------------------------------------------------- */
-
 /* inline code */
 .feather-doc :not(pre, h1, h2, h3, h4, h5, h6) > code {
   font-size: var(--feather-code-font-size);
 }
 
 .feather-doc :not(pre, div) > code {
+  border: 1px solid var(--feather-c-border);
   border-radius: 4px;
   padding: 3px 6px;
-  color: var(--feather-c-text-code);
-  background-color: var(--feather-c-bg-mute);
+  color: var(--feather-c-theme-1);
+  background-color: var(--feather-c-white-2);
   transition: color 0.5s, background-color 0.5s;
 }
 
@@ -250,18 +226,18 @@
 }
 
 .feather-doc a > code {
-  color: var(--feather-c-brand);
+  color: var(--feather-c-theme-1);
   transition: color 0.25s;
 }
 
 .feather-doc a:hover > code {
-  color: var(--feather-c-brand-dark);
+  color: var(--feather-c-theme-1);
 }
 
 .feather-doc div[class*='language-'] {
   position: relative;
   margin: 16px -24px;
-  background-color: var(--feather-code-block-bg);
+  background-color: var(--feather-c-black-2);
   overflow-x: auto;
   transition: background-color 0.5s;
 }
@@ -320,12 +296,12 @@
   min-width: 100%;
   line-height: var(--feather-code-line-height);
   font-size: var(--feather-code-font-size);
-  color: var(--feather-code-block-color);
+  color: var(--feather-c-white-1);
   transition: color 0.5s;
 }
 
 .feather-doc [class*='language-'] code .highlighted {
-  background-color: var(--feather-code-line-highlight-color);
+  background-color: var(--feather-c-theme-1);
   transition: background-color 0.5s;
   margin: 0 -24px;
   padding: 0 24px;
@@ -344,48 +320,13 @@
   border-radius: 4px;
   width: 40px;
   height: 40px;
-  background-color: var(--feather-code-block-bg);
+  background-color: var(--feather-c-black-2);
   opacity: 0;
   cursor: pointer;
-  background-image: var(--feather-icon-copy);
   background-position: 50%;
   background-size: 20px;
   background-repeat: no-repeat;
   transition: opacity 0.4s;
-}
-
-.feather-doc [class*='language-']:hover > button.copy,
-.feather-doc [class*='language-'] > button.copy:focus {
-  opacity: 1;
-}
-
-.feather-doc [class*='language-'] > button.copy:hover {
-  background-color: var(--feather-code-copy-code-hover-bg);
-}
-
-.feather-doc [class*='language-'] > button.copy.copied,
-.feather-doc [class*='language-'] > button.copy:hover.copied {
-  border-radius: 0 4px 4px 0;
-  background-color: var(--feather-code-copy-code-hover-bg);
-  background-image: var(--feather-icon-copied);
-}
-
-.feather-doc [class*='language-'] > button.copy.copied::before,
-.feather-doc [class*='language-'] > button.copy:hover.copied::before {
-  position: relative;
-  left: -65px;
-  display: block;
-  border-radius: 4px 0 0 4px;
-  padding-top: 8px;
-  width: 64px;
-  height: 40px;
-  text-align: center;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--feather-code-copy-code-active-text);
-  background-color: var(--feather-code-copy-code-hover-bg);
-  white-space: nowrap;
-  content: 'Copied';
 }
 
 .feather-doc [class*='language-'] > span.lang {
@@ -395,7 +336,7 @@
   z-index: 2;
   font-size: 12px;
   font-weight: 500;
-  color: var(--feather-c-text-dark-3);
+  color: var(--feather-c-white-1);
   transition: color 0.4s, opacity 0.4s;
 }
 
