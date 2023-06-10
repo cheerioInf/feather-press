@@ -8,6 +8,13 @@ module.exports = {
     'stylelint-prettier/recommended'
   ],
   rules: {
-    'prettier/prettier': true
+    'prettier/prettier': true,
+    'color-function-notation': null,
+    'selector-pseudo-class-no-unknown': [
+      true,
+      {
+        ignorePseudoClasses: ['global']
+      }
+    ]
   }
 };

@@ -44,7 +44,7 @@ export interface SiteConfig {
   siteData: UserConfig;
 }
 
-export type PageType = 'home' | 'doc' | 'custom' | '404';
+export type PageType = 'home' | 'doc' | '404';
 
 export interface Header {
   id: string;

@@ -1,9 +1,9 @@
 .nav {
-  padding-left: max(
+  padding-right: max(
     32px,
     calc(32px + (100vw - var(--feather-layout-max-width)) / 2)
   );
-  padding-right: max(
+  padding-left: max(
     32px,
     calc(32px + (100vw - var(--feather-layout-max-width)) / 2)
   );
@@ -12,10 +12,11 @@
 
 .social-link-icon {
   display: flex;
-  fill: currentColor;
-  transition: color 0.2s;
-  color: var(--feather-c-text-2);
+  opacity: var(--feather-opacity-4);
+  fill: currentcolor;
+  transition: 0.2s;
+
   &:hover {
-    color: var(--feather-c-text-1);
+    opacity: var(--feather-opacity-3);
   }
 }

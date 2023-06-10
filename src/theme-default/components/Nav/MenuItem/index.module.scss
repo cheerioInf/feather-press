@@ -1,10 +1,11 @@
-.link:hover {
-  color: var(--feather-c-brand);
-  transition: color 0.2s;
-}
-
 .link {
   display: block;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
+  transition: 0.1s;
+}
+
+.link:hover {
+  font-size: 16px;
+  border-bottom: 3px solid var(--feather-c-theme-1);
 }

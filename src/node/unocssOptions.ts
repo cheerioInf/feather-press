@@ -7,7 +7,7 @@ const options: VitePluginConfig = {
     [
       /^divider-(\w+)$/,
       ([, w]) => ({
-        [`border-${w}`]: '1px solid var(--feather-c-divider-light)'
+        [`border-${w}`]: '1px solid var(--feather-c-border)'
       })
     ],
     [
@@ -17,7 +17,7 @@ const options: VitePluginConfig = {
         'margin-left': '12px',
         width: '1px',
         height: '24px',
-        'background-color': 'var(--feather-c-divider-light)',
+        'background-color': 'var(--feather-c-border)',
         content: '" "'
       }
     ]

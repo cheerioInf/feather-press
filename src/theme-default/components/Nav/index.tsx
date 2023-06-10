@@ -1,4 +1,3 @@
-// import { e } from 'unocss';
 import { SwitchAppearance } from '../SwitchAppearance';
 import { MenuItem } from './MenuItem';
 import styles from './index.module.scss';
@@ -21,8 +20,8 @@ export function Nav() {
         <div>
           <a
             href="/"
-            hover="opacity-60"
-            className="w-full h-full text-1rem font-semibold flex items-center"
+            hover="opacity-50 transition-500"
+            className="w-full h-full text-lg font-semibold text-1rem flex items-center"
           >
             {title}
           </a>
