@@ -1,4 +1,4 @@
-import { e } from 'unocss';
+// import { e } from 'unocss';
 import { SwitchAppearance } from '../SwitchAppearance';
 import { MenuItem } from './MenuItem';
 import styles from './index.module.scss';
