@@ -35,6 +35,7 @@
 :root {
   --feather-nav-height: 56px;
   --feather-layout-max-width: 1440px;
+  --feather-sidebar-width: 272px;
 }
 
 :root {
@@ -45,6 +46,16 @@
   --feather-c-border: var(--feather-c-white-5);
 
   --feather-c-bg: var(--feather-c-white-1);
+  --feather-c-bg-feature: var(--feather-c-white-3);
+}
+
+:root {
+  --feather-font-family-base: 'Inter var experimental', 'Inter var',
+    '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  --feather-font-family-mono: 'Menlo', 'Monaco', 'Consolas', 'Courier New',
+    monospace;
 }
 
 .dark {
@@ -55,4 +66,5 @@
   --feather-c-border: var(--feather-c-gray-4);
 
   --feather-c-bg: var(--feather-c-black-1);
+  --feather-c-bg-feature: var(--feather-c-gray-5);
 }

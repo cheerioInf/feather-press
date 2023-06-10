@@ -38,11 +38,7 @@ export function Nav() {
             <SwitchAppearance />
           </div>
           {/* 外部链接 */}
-          <div
-            className={styles.socialLinkIcon}
-            before="menu-item-before"
-            ml="2"
-          >
+          <div className={styles.socialLinkIcon} before="menu-item-before">
             <a target="blank" href={githubLink} className="flex items-center">
               <div className="i-carbon-logo-github w-6 h-6 fill-current"></div>
             </a>
