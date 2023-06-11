@@ -111,59 +111,76 @@ export async function renderPage(
       ${Object.entries(islandPathToMap)
         .map(
           ([islandName, islandPath]) =>
-            `import { ${islandName} } from '${islandPath}'`
+            `import { ${islandName} } from '${islandPath}';`
         )
         .join('')}
-  window.ISLANDS = { ${Object.keys(islandPathToMap).join(', ')} };
+  window.ISLANDS = { ${Object.entries(islandPathToMap)
+    .map(([islandName]) => `${islandName}`)
+    .join(',')} };
   window.ISLAND_PROPS = JSON.parse(
     document.getElementById('island-props').textContent
   );
     `;
     const injectId = 'island:inject';
-    return viteBuild({
-      mode: 'production',
-      esbuild: {
-        jsx: 'automatic'
-      },
-      build: {
-        // 输出目录
-        outDir: path.join(root, '.temp'),
-        rollupOptions: {
-          input: injectId,
-          external: EXTERNALS
-        }
-      },
-      plugins: [
-        // 重点插件，用来加载我们拼接的 Islands 注册模块的代码
-        {
-          name: 'island:inject',
-          enforce: 'post',
-          resolveId(id) {
-            if (id.includes(MASK_SPLITTER)) {
-              const [originId, importer] = id.split(MASK_SPLITTER);
-              return this.resolve(originId, importer, { skipSelf: true });
-            }
-
-            if (id === injectId) {
-              return id;
-            }
-          },
-          load(id) {
-            if (id === injectId) {
-              return islandsInjectCode;
-            }
-          },
-          // 对于 Islands Bundle，我们只需要 JS 即可，其它资源文件可以删除
-          generateBundle(_, bundle) {
-            for (const name in bundle) {
-              if (bundle[name].type === 'asset') {
-                delete bundle[name];
+    try {
+      const res = await viteBuild({
+        mode: 'production',
+        esbuild: {
+          jsx: 'automatic'
+        },
+        build: {
+          // 输出目录
+          outDir: path.join(root, '.temp'),
+          rollupOptions: {
+            external: EXTERNALS,
+            input: injectId
+          }
+        },
+        plugins: [
+          // 重点插件，用来加载我们拼接的 Islands 注册模块的代码
+          {
+            name: 'island:inject',
+            enforce: 'post',
+            resolveId(id) {
+              try {
+                if (id.includes(MASK_SPLITTER)) {
+                  const [originId, importer] = id.split(MASK_SPLITTER);
+                  return this.resolve(originId, importer, { skipSelf: true });
+                }
+                if (id === injectId) {
+                  return injectId;
+                }
+              } catch (err) {
+                console.error('re' + err);
+              }
+            },
+            load(id) {
+              try {
+                if (id === injectId) {
+                  return islandsInjectCode;
+                }
+              } catch (err) {
+                console.error('lo' + err);
+              }
+            },
+            generateBundle(_options, bundle) {
+              try {
+                for (const name in bundle) {
+                  if (bundle[name].type === 'asset') {
+                    delete bundle[name];
+                  }
+                }
+              } catch (err) {
+                console.error('ge' + err);
               }
             }
           }
-        }
-      ]
-    });
+        ]
+      });
+      return res;
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   // 遍历路由数组，生成同构 html 文件
@@ -187,6 +204,7 @@ export async function renderPage(
         (chunk) => chunk.type === 'asset' && chunk.fileName.endsWith('.css')
       );
       const islandBundle = await buildIslands(root, islandToPathMap);
+
       const islandsCode = (islandBundle as RollupOutput).output[0].code;
       const normalizeVendorFilename = (fileName: string) =>
         fileName.replace(/\//g, '_') + '.js';
@@ -203,12 +221,11 @@ export async function renderPage(
             ${helmet?.style?.toString() || ''}
             <meta name="description" content="xxx">
             ${styleAssets
-              .map((item) => `<link rel="stylesheet" href="/${item.fileName}">`)
+              .map(
+                (item) => `<link rel="stylesheet" href="/${item.fileName}" />`
+              )
               .join('\n')}
-          </head>
-          <body>
-            <div id="root">${appHtml}</div>
-            <script type="importmap">
+              <script type="importmap">
               {
                 "imports": {
                   ${EXTERNALS.map(
@@ -217,6 +234,9 @@ export async function renderPage(
                 }
               }
             </script>
+          </head>
+          <body>
+            <div id="root">${appHtml}</div>
             <script type="module">${islandsCode}</script>
             <script type="module" src="/${clientChunk?.fileName}"></script>
             <script id="island-props">${JSON.stringify(islandProps)}</script>
@@ -233,9 +253,6 @@ export async function renderPage(
       await fs.writeFile(join(root, 'build', fileName), html);
     })
   );
-
-  // 删除 .temp 目录
-  await fs.remove(join(root, '.temp'));
 }
 
 /**
@@ -254,6 +271,6 @@ export default async function build(root: string, config: SiteConfig) {
   try {
     await renderPage(render, routes, root, clientBundle);
   } catch (err) {
-    console.error('Render page error.\n', err);
+    // console.error('Render page error.\n', err);
   }
 }

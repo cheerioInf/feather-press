@@ -15,16 +15,24 @@ export default defineConfig({
           text: '教程',
           items: [
             {
+              text: '介绍',
+              link: '/guide/'
+            },
+            {
               text: '快速上手',
               link: '/guide/a'
             },
             {
-              text: '如何安装',
+              text: '配置',
               link: '/guide/b'
             },
             {
-              text: '注意事项',
+              text: '部署',
               link: '/guide/c'
+            },
+            {
+              text: '插件',
+              link: '/guide/d'
             }
           ]
         }
