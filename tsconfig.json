@@ -1,18 +1,14 @@
 {
   "compilerOptions": {
-    // 编译输出目录
     "outDir": "dist",
-    // 编译后的代码使用的 JavaScript 版本，ESNext 表示最新的 JavaScript 版本
     "target": "ESNext",
     "module": "ESNext",
-    // 源代码目录
     "rootDir": ".",
-    // 是否支持 jsx 语法，react-jsx 表示支持 react 的 jsx 语法
     "jsx": "react-jsx",
     "moduleResolution": "node",
-    // esModuleInterop 表示是否允许 import export 语法
     "esModuleInterop": true,
     "baseUrl": "src",
+    // paths 表示路径别名
     "paths": {
       "@runtime": ["./runtime/index.ts"]
     }

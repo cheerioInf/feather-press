@@ -1,19 +1,9 @@
 import { loadConfigFromFile } from 'vite';
-import { SiteConfig, UserConfig } from '../shared/types/index';
+import { RawConfig, SiteConfig, UserConfig } from '../shared/types/index';
 import { resolve } from 'path';
 import fs from 'fs-extra';
 
-// 初次解析配置文件时, 可能会返回三种类型的配置
-type RawConfig =
-  | UserConfig
-  | Promise<UserConfig>
-  | (() => UserConfig | Promise<UserConfig>);
-
-/**
- * 获取用户配置文件路径
- * @param root 项目根目录
- * @returns 配置文件路径
- */
+// 获取用户配置文件路径
 function getUserConfigPath(root: string) {
   try {
     const supportConfigFiles = ['config.ts', 'config.js'];
@@ -28,14 +18,8 @@ function getUserConfigPath(root: string) {
   }
 }
 
-/**
- * 解析用户配置文件
- * @param root 项目根目录
- * @param command 环境变量
- * @param mode 开发模式
- * @returns [配置文件路径, 用户配置]
- */
-export async function resolveUserConfig(
+// 获取用户配置信息
+async function resolveUserConfig(
   root: string,
   command: 'serve' | 'build',
   mode: 'development' | 'production'
@@ -53,19 +37,14 @@ export async function resolveUserConfig(
     const userConfig = await (typeof rawConfig === 'function'
       ? rawConfig()
       : rawConfig);
-    // as const 的作用是将一个对象的所有属性值都变为只读的
     return [configPath, userConfig] as const;
   } else {
     return [configPath, {} as UserConfig] as const;
   }
 }
 
-/**
- * 在用户没有配置时使用默认值
- * @param userConfig 用户配置
- * @returns 默认配置
- */
-export function resolveSiteData(userConfig: UserConfig): UserConfig {
+// 设置默认配置
+function setDefaultSiteData(userConfig: UserConfig): UserConfig {
   return {
     title: userConfig.title || 'feather.js',
     description: userConfig.description || 'SSG Framework',
@@ -76,7 +55,7 @@ export function resolveSiteData(userConfig: UserConfig): UserConfig {
 
 /**
  * 解析配置文件主函数
- * @param root 解析根目录
+ * @param root 根目录
  * @param command 环境变量
  * @param mode 开发模式
  * @returns 配置文件
@@ -91,7 +70,7 @@ export async function resolveConfig(
   const siteConfig: SiteConfig = {
     root,
     configPath: configPath,
-    siteData: resolveSiteData(userConfig as UserConfig)
+    siteData: setDefaultSiteData(userConfig as UserConfig)
   };
   return siteConfig;
 }

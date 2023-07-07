@@ -122,65 +122,59 @@ export async function renderPage(
   );
     `;
     const injectId = 'island:inject';
-    try {
-      const res = await viteBuild({
-        mode: 'production',
-        esbuild: {
-          jsx: 'automatic'
-        },
-        build: {
-          // 输出目录
-          outDir: path.join(root, '.temp'),
-          rollupOptions: {
-            external: EXTERNALS,
-            input: injectId
-          }
-        },
-        plugins: [
-          // 重点插件，用来加载我们拼接的 Islands 注册模块的代码
-          {
-            name: 'island:inject',
-            enforce: 'post',
-            resolveId(id) {
-              try {
-                if (id.includes(MASK_SPLITTER)) {
-                  const [originId, importer] = id.split(MASK_SPLITTER);
-                  return this.resolve(originId, importer, { skipSelf: true });
-                }
-                if (id === injectId) {
-                  return injectId;
-                }
-              } catch (err) {
-                console.error('re' + err);
+    return viteBuild({
+      mode: 'production',
+      esbuild: {
+        jsx: 'automatic'
+      },
+      build: {
+        // 输出目录
+        outDir: path.join(root, '.temp'),
+        rollupOptions: {
+          external: EXTERNALS,
+          input: injectId
+        }
+      },
+      plugins: [
+        // 重点插件，用来加载我们拼接的 Islands 注册模块的代码
+        {
+          name: 'island:inject',
+          enforce: 'post',
+          resolveId(id = '') {
+            try {
+              if (id.includes(MASK_SPLITTER)) {
+                const [originId, importer] = id.split(MASK_SPLITTER);
+                return this.resolve(originId, importer, { skipSelf: true });
+              } else {
+                return id;
               }
-            },
-            load(id) {
-              try {
-                if (id === injectId) {
-                  return islandsInjectCode;
-                }
-              } catch (err) {
-                console.error('lo' + err);
+            } catch (err) {
+              console.error('re' + err);
+            }
+          },
+          load(id) {
+            try {
+              if (id === injectId) {
+                return islandsInjectCode;
               }
-            },
-            generateBundle(_options, bundle) {
-              try {
-                for (const name in bundle) {
-                  if (bundle[name].type === 'asset') {
-                    delete bundle[name];
-                  }
+            } catch (err) {
+              console.error('lo' + err);
+            }
+          },
+          generateBundle(_options, bundle) {
+            try {
+              for (const name in bundle) {
+                if (bundle[name].type === 'asset') {
+                  delete bundle[name];
                 }
-              } catch (err) {
-                console.error('ge' + err);
               }
+            } catch (err) {
+              console.error('ge' + err);
             }
           }
-        ]
-      });
-      return res;
-    } catch (err) {
-      console.error(err);
-    }
+        }
+      ]
+    });
   }
 
   // 遍历路由数组，生成同构 html 文件
@@ -204,7 +198,6 @@ export async function renderPage(
         (chunk) => chunk.type === 'asset' && chunk.fileName.endsWith('.css')
       );
       const islandBundle = await buildIslands(root, islandToPathMap);
-
       const islandsCode = (islandBundle as RollupOutput).output[0].code;
       const normalizeVendorFilename = (fileName: string) =>
         fileName.replace(/\//g, '_') + '.js';
@@ -260,7 +253,7 @@ export async function renderPage(
  * @param root 项目根目录
  * @param config 站点配置
  */
-export default async function build(root: string, config: SiteConfig) {
+export async function build(root: string, config: SiteConfig) {
   // 打包 client 和 server 的 bundle 文件
   const [clientBundle] = await bundle(root, config);
 

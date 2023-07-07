@@ -104,3 +104,8 @@ export interface Hero {
 export type PropsWithIsland = {
   __island?: boolean;
 };
+
+export type RawConfig =
+  | UserConfig
+  | Promise<UserConfig>
+  | (() => UserConfig | Promise<UserConfig>);
