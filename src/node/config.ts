@@ -1,5 +1,5 @@
 import { loadConfigFromFile } from 'vite';
-import { RawConfig, SiteConfig, UserConfig } from '../shared/types/index';
+import { RawConfig, SiteConfig, UserConfig } from '../shared/types';
 import { resolve } from 'path';
 import fs from 'fs-extra';
 

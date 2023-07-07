@@ -3,18 +3,15 @@ import {
   CLIENT_ENTRY_PATH,
   CLIENT_OUTPUT,
   EXTERNALS,
-  MASK_SPLITTER,
   PACKAGE_ROOT,
   SERVER_ENTRY_PATH
 } from './constants';
-import path, { dirname, join } from 'path';
+import { join } from 'path';
 import fs from 'fs-extra';
 import type { RollupOutput } from 'rollup';
 import { createVitePlugins } from './vitePlugins';
-import { Route } from './plugin-routes';
-import { SiteConfig } from '../shared/types/index';
-import { RenderResult } from 'runtime/server-entry';
-import { HelmetData } from 'react-helmet-async';
+import { SiteConfig } from '../shared/types';
+import { renderPage } from './renderPage';
 
 /**
  * 打包 client 和 server 的 bundle 文件
@@ -37,7 +34,6 @@ async function bundle(root: string, config: SiteConfig) {
         root,
         plugins: await createVitePlugins(config, undefined, isServer),
         ssr: {
-          // 注意加上这个配置，防止 cjs 产物中 require ESM 的产物，因为 react-router-dom 的产物为 ESM 格式
           noExternal: ['react-router-dom', 'lodash-es']
         },
         build: {
@@ -74,6 +70,7 @@ async function bundle(root: string, config: SiteConfig) {
       await fs.copy(publicDir, join(root, CLIENT_OUTPUT));
     }
 
+    // 拷贝 vendors 目录到 build 目录
     await fs.copy(join(PACKAGE_ROOT, 'vendors'), join(root, CLIENT_OUTPUT));
 
     return [clientBundle, serverBundle] as [RollupOutput, RollupOutput];
@@ -82,188 +79,16 @@ async function bundle(root: string, config: SiteConfig) {
   }
 }
 
-/**
- * 生成 html 文件，将 client bundle 注入到 html 中，输出到 build 目录，完成打包
- * @param render render 函数
- * @param routes 路由数组
- * @param root 项目根目录
- * @param clientBundle client bundle
- */
-export async function renderPage(
-  render: (url: string, helmetContext: object) => Promise<RenderResult>,
-  routes: Route[],
-  root: string,
-  clientBundle: RollupOutput
-) {
-  console.log('Rendering page in server side...');
-
-  // 获取 client bundle 的入口 chunk
-  const clientChunk = clientBundle.output.find(
-    (chunk) => chunk.type === 'chunk' && chunk.isEntry
-  );
-
-  async function buildIslands(
-    root: string,
-    islandPathToMap: Record<string, string>
-  ) {
-    // 根据 islandPathToMap 拼接模块代码内容
-    const islandsInjectCode = `
-      ${Object.entries(islandPathToMap)
-        .map(
-          ([islandName, islandPath]) =>
-            `import { ${islandName} } from '${islandPath}';`
-        )
-        .join('')}
-  window.ISLANDS = { ${Object.entries(islandPathToMap)
-    .map(([islandName]) => `${islandName}`)
-    .join(',')} };
-  window.ISLAND_PROPS = JSON.parse(
-    document.getElementById('island-props').textContent
-  );
-    `;
-    const injectId = 'island:inject';
-    return viteBuild({
-      mode: 'production',
-      esbuild: {
-        jsx: 'automatic'
-      },
-      build: {
-        // 输出目录
-        outDir: path.join(root, '.temp'),
-        rollupOptions: {
-          external: EXTERNALS,
-          input: injectId
-        }
-      },
-      plugins: [
-        // 重点插件，用来加载我们拼接的 Islands 注册模块的代码
-        {
-          name: 'island:inject',
-          enforce: 'post',
-          resolveId(id = '') {
-            try {
-              if (id.includes(MASK_SPLITTER)) {
-                const [originId, importer] = id.split(MASK_SPLITTER);
-                return this.resolve(originId, importer, { skipSelf: true });
-              } else {
-                return id;
-              }
-            } catch (err) {
-              console.error('re' + err);
-            }
-          },
-          load(id) {
-            try {
-              if (id === injectId) {
-                return islandsInjectCode;
-              }
-            } catch (err) {
-              console.error('lo' + err);
-            }
-          },
-          generateBundle(_options, bundle) {
-            try {
-              for (const name in bundle) {
-                if (bundle[name].type === 'asset') {
-                  delete bundle[name];
-                }
-              }
-            } catch (err) {
-              console.error('ge' + err);
-            }
-          }
-        }
-      ]
-    });
-  }
-
-  // 遍历路由数组，生成同构 html 文件
-  await Promise.all(
-    [
-      ...routes,
-      {
-        path: '/404'
-      }
-    ].map(async (route) => {
-      const routePath = route.path;
-      const helmetContext = {
-        context: {}
-      } as HelmetData;
-      const {
-        appHtml,
-        islandToPathMap,
-        islandProps = []
-      } = await render(routePath, helmetContext.context);
-      const styleAssets = clientBundle.output.filter(
-        (chunk) => chunk.type === 'asset' && chunk.fileName.endsWith('.css')
-      );
-      const islandBundle = await buildIslands(root, islandToPathMap);
-      const islandsCode = (islandBundle as RollupOutput).output[0].code;
-      const normalizeVendorFilename = (fileName: string) =>
-        fileName.replace(/\//g, '_') + '.js';
-      const { helmet } = helmetContext.context;
-      const html = `
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width,initial-scale=1">
-            ${helmet?.title?.toString() || ''}
-            ${helmet?.meta?.toString() || ''}
-            ${helmet?.link?.toString() || ''}
-            ${helmet?.style?.toString() || ''}
-            <meta name="description" content="xxx">
-            ${styleAssets
-              .map(
-                (item) => `<link rel="stylesheet" href="/${item.fileName}" />`
-              )
-              .join('\n')}
-              <script type="importmap">
-              {
-                "imports": {
-                  ${EXTERNALS.map(
-                    (name) => `"${name}": "/${normalizeVendorFilename(name)}"`
-                  ).join(',')}
-                }
-              }
-            </script>
-          </head>
-          <body>
-            <div id="root">${appHtml}</div>
-            <script type="module">${islandsCode}</script>
-            <script type="module" src="/${clientChunk?.fileName}"></script>
-            <script id="island-props">${JSON.stringify(islandProps)}</script>
-          </body>
-        </html>`.trim();
-
-      const fileName = routePath.endsWith('/')
-        ? `${routePath}index.html`
-        : `${routePath}.html`;
-
-      // 如果目录不存在，则创建目录
-      await fs.ensureDir(join(root, 'build', dirname(fileName)));
-      // 将 html 文件写入 build 目录
-      await fs.writeFile(join(root, 'build', fileName), html);
-    })
-  );
-}
-
-/**
- * 打包
- * @param root 项目根目录
- * @param config 站点配置
- */
 export async function build(root: string, config: SiteConfig) {
-  // 打包 client 和 server 的 bundle 文件
   const [clientBundle] = await bundle(root, config);
 
   const serverEntryPath = join(root, '.temp', 'server-entry.js');
   // 获得 ssr render 函数和路由数组
   const { render, routes } = await import(serverEntryPath);
   // 生成 html 文件，将 client bundle 注入到 html 中，输出到 build 目录，完成打包
-  try {
-    await renderPage(render, routes, root, clientBundle);
-  } catch (err) {
-    // console.error('Render page error.\n', err);
-  }
+  // try {
+  await renderPage(render, routes, root, clientBundle);
+  // } catch (err) {
+  //   console.error('Render page error.\n', err);
+  // }
 }
