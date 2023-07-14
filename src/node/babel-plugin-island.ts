@@ -13,12 +13,12 @@ export default declare((api) => {
     // 在 JSX 元素开始的地方触发
     JSXOpeningElement(path, state) {
       // 拿到组件名
-      const name = path.node.name;
+      const identifier = path.node.name;
       let bindingName = '';
-      if (name.type === 'JSXIdentifier') {
-        bindingName = name.name;
-      } else if (name.type === 'JSXMemberExpression') {
-        let object = name.object;
+      if (identifier.type === 'JSXIdentifier') {
+        bindingName = identifier.name;
+      } else if (identifier.type === 'JSXMemberExpression') {
+        let object = identifier.object;
         while (t.isJSXMemberExpression(object)) {
           object = object.object;
         }
@@ -31,7 +31,7 @@ export default declare((api) => {
       const binding = path.scope.getBinding(bindingName);
 
       if (binding?.path.parent.type === 'ImportDeclaration') {
-        // 定位到 import 语句之后，我们拿到 Island 组件对应的引入路径
+        // 定位到 import 语句之后，拿到 Island 组件对应的引入路径
         const source = binding.path.parent.source;
         // 然后将 __island prop 进行修改
         const attributes = (path.container as t.JSXElement).openingElement

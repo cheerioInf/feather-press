@@ -12,6 +12,7 @@ describe('babel-plugin-island', () => {
   // 模拟 Windows 路径
   const prefix = isWindows ? 'C:' : '';
   const IMPORTER_PATH = prefix + '/User/project/test.tsx';
+
   const babelOptions: TransformOptions = {
     filename: IMPORTER_PATH,
     presets: ['@babel/preset-react'],

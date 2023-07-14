@@ -65,7 +65,8 @@ export async function renderPage(
               if (id.includes(MASK_SPLITTER)) {
                 const [originId, importer] = id.split(MASK_SPLITTER);
                 return this.resolve(originId, importer, { skipSelf: true });
-              } else {
+              }
+              if (id === injectId) {
                 return id;
               }
             } catch (err) {
@@ -89,7 +90,7 @@ export async function renderPage(
                 }
               }
             } catch (err) {
-              console.error('ge' + err);
+              console.error(err);
             }
           }
         }

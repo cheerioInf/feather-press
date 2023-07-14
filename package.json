@@ -11,7 +11,7 @@
     "lint": "npx --no -- lint-staged",
     "lint:script": "eslint --ext .ts,.tsx,.js,.jsx --fix ./",
     "lint:style": "stylelint --fix \"./src/**/*.{css,scss}\"",
-    "test:init": "vitest run",
+    "test:unit": "vitest run",
     "prepare:e2e": "tsx scripts/prepare-e2e.ts",
     "test:e2e": "playwright test"
   },

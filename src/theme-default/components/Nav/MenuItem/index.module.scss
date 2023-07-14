@@ -5,7 +5,17 @@
   transition: 0.1s;
 }
 
+/* stylelint-disable-next-line selector-class-pattern */
+.linkMobile {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0;
+  margin-right: 4rem;
+  font-size: 18px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--feather-c-border);
+}
+
 .link:hover {
-  font-size: 16px;
-  border-bottom: 3px solid var(--feather-c-theme-1);
+  color: var(--feather-c-theme-1);
 }
