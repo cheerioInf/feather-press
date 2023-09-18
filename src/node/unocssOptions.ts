@@ -13,10 +13,9 @@ const options: VitePluginConfig = {
     [
       'menu-item-before',
       {
-        'margin-right': '12px',
-        'margin-left': '12px',
+        'margin-right': '1rem',
+        'margin-left': '1rem',
         width: '1px',
-        height: '24px',
         'background-color': 'var(--feather-c-border)',
         content: '" "'
       }

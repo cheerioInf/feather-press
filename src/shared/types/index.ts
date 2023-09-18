@@ -66,7 +66,7 @@ export interface FrontMatter {
 export interface PageData {
   siteData: UserConfig;
   pagePath: string;
-  frontmatter: FrontMatter;
+  frontMatter: FrontMatter;
   pageType: PageType;
   toc?: Header[];
   title: string;

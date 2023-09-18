@@ -12,6 +12,7 @@
   --feather-c-gray-3: #808080;
   --feather-c-gray-4: #707070;
   --feather-c-gray-5: #505050;
+  --feather-c-gray-6: #303030;
 
   --feather-c-black-1: #2f2f2f;
   --feather-c-black-2: #2a2a2a;
@@ -47,7 +48,7 @@
   --feather-c-border: var(--feather-c-white-5);
 
   --feather-c-bg: var(--feather-c-white-1);
-  --feather-c-bg-feature: var(--feather-c-white-3);
+  --feather-c-bg-feature: var(--feather-c-white-2);
 }
 
 :root {
@@ -72,5 +73,5 @@
   --feather-c-border: var(--feather-c-gray-4);
 
   --feather-c-bg: var(--feather-c-black-1);
-  --feather-c-bg-feature: var(--feather-c-gray-5);
+  --feather-c-bg-feature: var(--feather-c-gray-6);
 }

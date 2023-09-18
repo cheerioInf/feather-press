@@ -5,7 +5,7 @@ export function DocFooter() {
   const { prevPage, nextPage } = usePrevNextPage();
   return (
     <footer mt="8">
-      <div flex="~" gap="2" divider-top="~" pt="6">
+      <div flex="~" gap="2" divider-top="~" pt="6" pb="6">
         <div flex="~ col" className={styles.prev}>
           {prevPage && (
             <a href={prevPage.link} className={styles.pagerLink}>

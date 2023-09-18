@@ -1,13 +1,11 @@
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
-  // 指定多个入口文件
-  entryPoints: {
+  entry: {
     cli: 'src/node/cli.ts',
     index: 'src/node/index.ts',
     dev: 'src/node/dev.ts'
   },
-  // 在每次构建之前清理输出目录
   clean: true,
   outDir: 'dist',
   // 可以指定多个输出格式

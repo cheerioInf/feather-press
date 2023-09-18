@@ -10,6 +10,16 @@ import '../styles/doc.css';
 import 'uno.css';
 
 export function Layout() {
+  // 监听窗口大小变化，设置根元素字体大小，用于 rem 布局
+  const setRootFontSize = () => {
+    const html = document.documentElement;
+    const width = html.getBoundingClientRect().width;
+    // 最小字体 12px，最大字体 18px
+    const fontSize = Math.min(Math.max(width / 100, 12), 16);
+    html.style.fontSize = `${fontSize}px`;
+  };
+  window.addEventListener('resize', setRootFontSize);
+  setRootFontSize();
   const pageData = usePageData();
   const { pageType, title } = pageData;
   // 根据 pageType 分发不同的页面内容

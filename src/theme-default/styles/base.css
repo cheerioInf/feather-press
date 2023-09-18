@@ -5,9 +5,9 @@
 }
 
 html {
+  font-size: 0.8rem;
   line-height: 1.4;
-  font-size: 16px;
-  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 html.dark {
@@ -15,19 +15,34 @@ html.dark {
 }
 
 body {
-  margin: 0;
+  font-family: var(--feather-font-family-base);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--feather-c-text-1);
+  background-color: var(--feather-c-bg);
+}
+
+body.dark {
+  color: var(--feather-c-text-1);
+  background-color: var(--feather-c-bg);
+}
+
+body,
+html {
+  font-size: 0.8rem;
   width: 100%;
   min-width: 320px;
   min-height: 100vh;
-  line-height: 24px;
+  margin: 0;
   font-family: var(--feather-font-family-base);
-  font-size: 16px;
   font-weight: 400;
+  line-height: 24px;
   color: var(--feather-c-text-1);
   background-color: var(--feather-c-bg);
   direction: ltr;
   font-synthesis: none;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -43,9 +58,9 @@ h4,
 h5,
 h6 {
   margin: 0;
-  line-height: 24px;
   font-size: 16px;
   font-weight: 400;
+  line-height: 24px;
 }
 
 p {
@@ -76,9 +91,9 @@ a {
 
 ol,
 ul {
-  list-style: none;
-  margin: 0;
   padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
 blockquote {
@@ -118,10 +133,10 @@ input,
 optgroup,
 select,
 textarea {
-  border: 0;
   padding: 0;
   line-height: inherit;
   color: inherit;
+  border: 0;
 }
 
 button {
@@ -156,17 +171,13 @@ table {
   border-collapse: collapse;
 }
 
-input {
-  background-color: transparent;
-}
-
-input:-ms-input-placeholder,
-textarea:-ms-input-placeholder {
+input:input-placeholder,
+textarea:input-placeholder {
   color: var(--feather-c-text-3);
 }
 
-input::-ms-input-placeholder,
-textarea::-ms-input-placeholder {
+input::input-placeholder,
+textarea::input-placeholder {
   color: var(--feather-c-text-3);
 }
 
@@ -177,8 +188,12 @@ textarea::placeholder {
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
   margin: 0;
+  appearance: none;
+}
+
+input {
+  background-color: transparent;
 }
 
 textarea {
@@ -186,6 +201,6 @@ textarea {
 }
 
 fieldset {
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
