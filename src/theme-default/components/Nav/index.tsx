@@ -23,7 +23,7 @@ export function Nav() {
   }, [isShowMobileMenu]);
 
   return (
-    <header fixed="~" pos="t-0 l-0" w="100vw" z="10">
+    <header fixed="~" pos="t-0 l-0" w="full" z="10">
       <div
         flex="~"
         items="center"
@@ -53,7 +53,7 @@ export function Nav() {
                 <div className={styles.mobileAppearance}>
                   <div
                     style={{
-                      transform: 'scale(1.5)'
+                      transform: 'scale(1.2)'
                     }}
                   >
                     <SwitchAppearance __island />
@@ -72,11 +72,11 @@ export function Nav() {
             )}
           </div>
         ) : (
-          <div flex="~">
+          <div flex="~" className="flex align-middle">
             {/* 普通菜单 */}
-            <div flex="~">
+            <div flex="~" className="items-center">
               {nav.map((item) => (
-                <MenuItem item={item} key={item.text} />
+                <MenuItem item={item} key={item.text} mobile={false} />
               ))}
             </div>
             {/* 深色模式 */}

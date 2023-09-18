@@ -1,23 +1,15 @@
 .nav {
-  padding-right: max(
-    32px,
-    calc(32px + (100vw - var(--feather-layout-max-width)) / 2)
-  );
-  padding-left: max(
-    32px,
-    calc(32px + (100vw - var(--feather-layout-max-width)) / 2)
-  );
+  padding: 2rem;
   background-color: var(--feather-c-bg);
 }
 
-/* stylelint-disable-next-line selector-class-pattern */
 .mobileMenu {
   position: absolute;
   top: 0;
   right: 0;
   width: 100vw;
   height: calc(100vh - 3.5rem);
-  margin-top: 3.5rem;
+  margin-top: calc(3.5rem + 7px);
   background-color: var(--feather-c-bg);
 }
 
@@ -32,7 +24,6 @@
   }
 }
 
-/* stylelint-disable-next-line selector-class-pattern */
 .social-link-iconMobile {
   display: flex;
   padding: 1rem 1.8rem;
@@ -41,7 +32,6 @@
   transition: 0.2s;
 }
 
-/* stylelint-disable-next-line selector-class-pattern */
 .mobileAppearance {
   display: flex;
   align-items: center;

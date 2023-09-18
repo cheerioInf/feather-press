@@ -11,17 +11,19 @@ interface SwitchProps {
 
 export function Switch(props: SwitchProps) {
   return (
-    <button
-      className={`${styles.switch} ${props.className}`}
-      id={props.id ?? ''}
-      type="button"
-      role="switch"
-      {...(props.onClick ? { onClick: props.onClick } : {})}
-    >
-      <span className={styles.check}>
-        <span className={styles.icon}>{props.children}</span>
-      </span>
-    </button>
+    <div className="flex items-center">
+      <button
+        className={`${styles.switch} ${props.className}`}
+        id={props.id ?? ''}
+        type="button"
+        role="switch"
+        {...(props.onClick ? { onClick: props.onClick } : {})}
+      >
+        <span className={styles.check}>
+          <span className={styles.icon}>{props.children}</span>
+        </span>
+      </button>
+    </div>
   );
 }
 
