@@ -1,10 +1,9 @@
 import { Content, usePageData } from '@runtime';
 import { useLocation } from 'react-router-dom';
 import { Sidebar } from '../../components/Sidebar';
-import styles from './index.module.scss';
+import './index.scss';
 import { DocFooter } from '../../components/DocFooter';
 import { Aside } from '../../components/Aside';
-import useWindowType from '../../logic/useWindowType';
 
 export function DocLayout() {
   const { siteData, toc } = usePageData();
@@ -17,30 +16,22 @@ export function DocLayout() {
   });
 
   const matchedSidebar = sidebarData[matchedSidebarKey] || [];
-  const windowType = useWindowType();
 
   return (
     <div>
-      <div className={styles.content} flex="~">
-        {windowType === 'mobile' ? null : (
+      <div className="content" flex="~">
+        <div className="hidden md:block">
           <Sidebar sidebarData={matchedSidebar} pathname={pathname} />
-        )}
-        <div
-          className={styles.docContent}
-          style={{
-            paddingLeft: windowType === 'mobile' ? '0rem' : '25rem'
-          }}
-        >
+        </div>
+        <div className="doc-content pl-0 md:pl-100">
           <div className="feather-doc">
             <Content />
           </div>
           <DocFooter />
         </div>
-        {windowType === 'ipad' || windowType === 'mobile' ? null : (
-          <div className={styles.asideContainer}>
-            <Aside headers={toc} />
-          </div>
-        )}
+        <div className="aside-container hidden lg:block">
+          <Aside headers={toc} />
+        </div>
       </div>
     </div>
   );

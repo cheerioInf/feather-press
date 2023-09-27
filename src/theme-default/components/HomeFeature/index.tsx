@@ -1,18 +1,8 @@
-// theme-default/components/HomeFeature/index.tsx
-
 import { Feature } from 'shared/types';
-import useWindowType from '../../logic/useWindowType';
 
 export function HomeFeature(props: { features: Feature[] }) {
-  const isIpad = useWindowType() === 'ipad';
-  const isMobile = useWindowType() === 'mobile';
-
   return (
-    <div
-      className={
-        isIpad ? 'p-l-40 p-r-40' : isMobile ? 'p-l-15 p-r-15' : 'p-l-60 p-r-60'
-      }
-    >
+    <div className="p-l-15 p-r-15 md:p-l-40 md:p-r-40 lg:p-l-60 lg:p-r-60">
       {props.features.map((feature, index) => {
         const { icon, title, details } = feature;
         return (

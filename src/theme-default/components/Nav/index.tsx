@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import useWindowType from '../../logic/useWindowType';
 import { SwitchAppearance } from '../SwitchAppearance';
 import { MenuItem } from './MenuItem';
 import styles from './index.module.scss';
@@ -39,58 +38,55 @@ export function Nav() {
             {title}
           </a>
         </div>
-        {useWindowType() === 'mobile' ? (
-          <div>
-            <div
-              onClick={() => setIsShowMobileMenu(!isShowMobileMenu)}
-              className="i-carbon-text-align-justify w-8 h-8 fill-current"
-            ></div>
-            {isShowMobileMenu && (
-              <div className={styles.mobileMenu}>
-                {nav.map((item) => (
-                  <MenuItem item={item} key={item.text} mobile />
-                ))}
-                <div className={styles.mobileAppearance}>
-                  <div
-                    style={{
-                      transform: 'scale(1.2)'
-                    }}
+        <div className="block md:hidden">
+          <div
+            onClick={() => setIsShowMobileMenu(!isShowMobileMenu)}
+            className="i-carbon-text-align-justify w-8 h-8 fill-current"
+          ></div>
+          {isShowMobileMenu && (
+            <div className={styles.mobileMenu}>
+              {nav.map((item) => (
+                <MenuItem item={item} key={item.text} mobile />
+              ))}
+              <div className={styles.mobileAppearance}>
+                <div
+                  style={{
+                    transform: 'scale(1.2)'
+                  }}
+                >
+                  <SwitchAppearance __island />
+                </div>
+                <div className={styles.socialLinkIconMobile}>
+                  <a
+                    target="blank"
+                    href={githubLink}
+                    className="flex items-center"
                   >
-                    <SwitchAppearance __island />
-                  </div>
-                  <div className={styles.socialLinkIconMobile}>
-                    <a
-                      target="blank"
-                      href={githubLink}
-                      className="flex items-center"
-                    >
-                      <div className="i-carbon-logo-github w-10 h-10 fill-current"></div>
-                    </a>
-                  </div>
+                    <div className="i-carbon-logo-github w-10 h-10 fill-current"></div>
+                  </a>
                 </div>
               </div>
-            )}
+            </div>
+          )}
+        </div>
+        <div className="hidden md:flex align-middle">
+          {/* 普通菜单 */}
+          <div flex="~" className="items-center">
+            {nav.map((item) => (
+              <MenuItem item={item} key={item.text} mobile={false} />
+            ))}
           </div>
-        ) : (
-          <div flex="~" className="flex align-middle">
-            {/* 普通菜单 */}
-            <div flex="~" className="items-center">
-              {nav.map((item) => (
-                <MenuItem item={item} key={item.text} mobile={false} />
-              ))}
-            </div>
-            {/* 深色模式 */}
-            <div before="menu-item-before" flex="~">
-              <SwitchAppearance __island />
-            </div>
-            {/* 外部链接 */}
-            <div className={styles.socialLinkIcon} before="menu-item-before">
-              <a target="blank" href={githubLink} className="flex items-center">
-                <div className="i-carbon-logo-github w-6 h-6 fill-current"></div>
-              </a>
-            </div>
+          {/* 深色模式 */}
+          <div before="menu-item-before" flex="~">
+            <SwitchAppearance __island />
           </div>
-        )}
+          {/* 外部链接 */}
+          <div className={styles.socialLinkIcon} before="menu-item-before">
+            <a target="blank" href={githubLink} className="flex items-center">
+              <div className="i-carbon-logo-github w-6 h-6 fill-current"></div>
+            </a>
+          </div>
+        </div>
       </div>
     </header>
   );

@@ -4,6 +4,7 @@ import { HomeFeature } from '../../components/HomeFeature/index';
 
 export function HomeLayout() {
   const { frontMatter } = usePageData();
+
   return (
     <div>
       <HomeHero hero={frontMatter.hero} />
