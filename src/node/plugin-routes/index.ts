@@ -1,6 +1,7 @@
 import { Plugin } from 'vite';
 import { RouteService } from './RouteService';
 import { PageModule } from 'shared/types';
+import React from 'react';
 
 export interface Route {
   path: string;
@@ -35,5 +36,5 @@ export function pluginRoutes(options: PluginOptions): Plugin {
         return routeService.generateRoutesCode(options.isSSR || false);
       }
     }
-  };
+  } as Plugin;
 }

@@ -1,6 +1,8 @@
 import styles from './index.module.scss';
 import { toggle } from '../../logic/toggleAppearance';
 import { PropsWithIsland } from '../../../shared/types/index';
+import useWindowType from '../../logic/useWindowType';
+import { updateAppearance } from '../../logic/toggleAppearance';
 
 interface SwitchProps {
   onClick?: () => void;
@@ -29,6 +31,14 @@ export function Switch(props: SwitchProps) {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function SwitchAppearance(props: PropsWithIsland) {
+  useWindowType();
+  // ssr 跳过
+  if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+    updateAppearance();
+    // 多标签页状态同步
+    window.addEventListener('storage', updateAppearance);
+  }
+
   return (
     <Switch onClick={toggle}>
       <div className={styles.sun}>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import isMobile from '../../logic/isMobile';
+import useWindowType from '../../logic/useWindowType';
 import { SwitchAppearance } from '../SwitchAppearance';
 import { MenuItem } from './MenuItem';
 import styles from './index.module.scss';
@@ -39,7 +39,7 @@ export function Nav() {
             {title}
           </a>
         </div>
-        {isMobile() ? (
+        {useWindowType() === 'mobile' ? (
           <div>
             <div
               onClick={() => setIsShowMobileMenu(!isShowMobileMenu)}

@@ -4,7 +4,7 @@ import { PageData } from 'shared/types';
 import { Layout } from '../theme-default';
 import siteData from 'feather:site-data';
 
-/**
+/*
  * 初始化页面数据
  * @param routePath 路由路径
  * @returns 页面数据

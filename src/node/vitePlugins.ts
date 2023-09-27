@@ -10,13 +10,6 @@ import path from 'path';
 import { PACKAGE_ROOT } from './constants';
 import babelPluginIsland from './babel-plugin-island';
 
-/**
- * 返回 vite 插件
- * @param config 配置文件
- * @param restartServer 重启服务器的函数
- * @param isSSR 是否为 SSR 模式
- * @returns vite 插件
- */
 export async function createVitePlugins(
   config: SiteConfig,
   restartServer?: () => Promise<void>,

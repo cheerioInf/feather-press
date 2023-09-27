@@ -7,13 +7,6 @@ import { dirname, join } from 'path';
 import { EXTERNALS, MASK_SPLITTER } from './constants';
 import { HelmetData } from 'react-helmet-async';
 
-/**
- * 生成 html 文件，将 client bundle 注入到 html 中，输出到 build 目录，完成打包
- * @param render render 函数
- * @param routes 路由数组
- * @param root 项目根目录
- * @param clientBundle client bundle
- */
 export async function renderPage(
   render: (url: string, helmetContext: object) => Promise<RenderResult>,
   routes: Route[],
@@ -21,6 +14,7 @@ export async function renderPage(
   clientBundle: RollupOutput
 ) {
   console.log('Rendering page in server side...');
+
   async function buildIslands(
     root: string,
     islandPathToMap: Record<string, string>
@@ -94,9 +88,11 @@ export async function renderPage(
             }
           }
         }
-      ]
+      ],
+      logLevel: 'silent'
     });
   }
+
   // 获取 client bundle 的入口 chunk
   const clientChunk = clientBundle.output.find(
     (chunk) => chunk.type === 'chunk' && chunk.isEntry
@@ -110,9 +106,7 @@ export async function renderPage(
         path: '/404'
       }
     ].map(async (route) => {
-      // 获取路由路径
       const routePath = route.path;
-      // helmetContext 用来收集 Helmet 数据
       const helmetContext = {
         context: {}
       } as HelmetData;
@@ -129,32 +123,45 @@ export async function renderPage(
       const styleAssets = clientBundle.output.filter(
         (chunk) => chunk.type === 'asset' && chunk.fileName.endsWith('.css')
       );
-      let islandBundle;
-      try {
-        islandBundle = await buildIslands(root, islandToPathMap);
-      } catch (err) {
-        console.log(err);
+
+      let islandBundle: RollupOutput | undefined;
+      let flag = true;
+      while (flag) {
+        try {
+          islandBundle = (await buildIslands(
+            root,
+            islandToPathMap
+          )) as RollupOutput;
+          flag = false;
+        } catch (err) {
+          continue;
+        }
       }
+
       const islandsCode = (islandBundle as RollupOutput).output[0].code;
+
       const normalizeVendorFilename = (fileName: string) =>
         fileName.replace(/\//g, '_') + '.js';
       const { helmet } = helmetContext.context;
       const html = `
       <!DOCTYPE html>
-      <html lang="en">
+      <html lang='en'>
         <head>
           <title></title>
-          <meta charset="utf-8">
-          <meta name="viewport" content="width=device-width,initial-scale=1">
+          <meta charset='utf-8'>
+          <meta name='viewport' content='width=device-width,initial-scale=1'>
           ${helmet?.title?.toString() || ''}
           ${helmet?.meta?.toString() || ''}
           ${helmet?.link?.toString() || ''}
           ${helmet?.style?.toString() || ''}
-          <meta name="description" content="xxx">
+          <meta name='description' content='xxx'>
           ${styleAssets
-            .map((item) => `<link rel="stylesheet" href="/${item.fileName}" />`)
+            .map((item) => `<link rel='stylesheet' href='/${item.fileName}' />`)
             .join('\n')}
-            <script type="importmap">
+        </head>
+        <body>
+          <div id='root'>${appHtml}</div>
+          <script type='importmap'>
             {
               "imports": {
                 ${EXTERNALS.map(
@@ -163,12 +170,11 @@ export async function renderPage(
               }
             }
           </script>
-        </head>
-        <body>
-          <div id="root">${appHtml}</div>
-          <script type="module">${islandsCode}</script>
-          <script type="module" src="/${clientChunk?.fileName}"></script>
-          <script id="island-props">${JSON.stringify(islandProps)}</script>
+          <script type='module'>${islandsCode}</script>
+          <script type='module' src='/${clientChunk?.fileName}'></script>
+          <script id='island-props' type='module'>${JSON.stringify(
+            islandProps
+          )}</script>
         </body>
       </html>`.trim();
 
@@ -176,10 +182,8 @@ export async function renderPage(
         ? `${routePath}index.html`
         : `${routePath}.html`;
 
-      // 如果目录不存在，则创建目录
       await fs.ensureDir(join(root, 'build', dirname(fileName)));
 
-      // 将 html 文件写入 build 目录
       await fs.writeFile(join(root, 'build', fileName), html);
     })
   );

@@ -1,7 +1,6 @@
 import compression from 'compression';
 import polka from 'polka';
 import path from 'path';
-// import { resolveConfig } from './config';
 import fs from 'fs-extra';
 import sirv from 'sirv';
 
@@ -20,7 +19,7 @@ export async function preview(root: string, { port }: { port?: number }) {
   // 静态资源服务
   const serve = sirv(outputDir, {
     etag: true,
-    maxAge: 31536000,
+    maxAge: 1,
     immutable: true,
     setHeaders(res, pathname) {
       if (pathname.endsWith('.html')) {

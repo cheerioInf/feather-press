@@ -1,6 +1,6 @@
 .sidebar {
   position: fixed;
-  width: 15rem;
+  width: 20rem;
   top: 0;
   bottom: 0;
   left: 0;
@@ -8,16 +8,9 @@
   overflow-x: hidden;
   overflow-y: auto;
   background-color: var(--feather-c-bg-feature);
-  box-shadow: var(--feather-shadow-2);
-  opacity: 0;
   transition: opacity 0.5s, transform 0.25s ease;
-  transform: translateX(-100%);
   z-index: 1;
   padding-top: var(--feather-nav-height);
-  padding-bottom: 128px;
-  visibility: visible;
-  box-shadow: none;
-  opacity: 1;
   transform: translateX(0);
 }
 

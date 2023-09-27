@@ -1,10 +1,10 @@
 import { Content, usePageData } from '@runtime';
 import { useLocation } from 'react-router-dom';
-import { Sidebar } from '../../components/Sidebar/index';
+import { Sidebar } from '../../components/Sidebar';
 import styles from './index.module.scss';
-import { DocFooter } from '../../components/DocFooter/index';
+import { DocFooter } from '../../components/DocFooter';
 import { Aside } from '../../components/Aside';
-import { useState, useEffect } from 'react';
+import useWindowType from '../../logic/useWindowType';
 
 export function DocLayout() {
   const { siteData, toc } = usePageData();
@@ -17,28 +17,18 @@ export function DocLayout() {
   });
 
   const matchedSidebar = sidebarData[matchedSidebarKey] || [];
-
-  const [width, setWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => setWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const isIpad = width <= 1000 && width >= 768;
-  const isMobile = width <= 768;
+  const windowType = useWindowType();
 
   return (
     <div>
       <div className={styles.content} flex="~">
-        {isMobile ? null : (
+        {windowType === 'mobile' ? null : (
           <Sidebar sidebarData={matchedSidebar} pathname={pathname} />
         )}
         <div
           className={styles.docContent}
           style={{
-            paddingLeft: isMobile ? '0rem' : '20rem'
+            paddingLeft: windowType === 'mobile' ? '0rem' : '25rem'
           }}
         >
           <div className="feather-doc">
@@ -46,9 +36,9 @@ export function DocLayout() {
           </div>
           <DocFooter />
         </div>
-        {isIpad || isMobile ? null : (
+        {windowType === 'ipad' || windowType === 'mobile' ? null : (
           <div className={styles.asideContainer}>
-            <Aside headers={toc} __island />
+            <Aside headers={toc} />
           </div>
         )}
       </div>

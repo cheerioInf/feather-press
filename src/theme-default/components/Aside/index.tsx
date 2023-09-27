@@ -1,8 +1,7 @@
 import { Header, PropsWithIsland } from 'shared/types';
-import { useRef, useEffect } from 'react';
-import { bindingAsideScroll, scrollToTarget } from '../../logic/asideScroll';
+import { useRef } from 'react';
 import { useHeaders } from '../../logic/useHeaders';
-import isMobile from '../../logic/isMobile';
+import useWindowType from '../../logic/useWindowType';
 
 interface AsideProps {
   headers: Header[];
@@ -12,32 +11,16 @@ export function Aside(props: AsideProps & PropsWithIsland) {
   const { headers: rawHeaders = [] } = props;
   const headers = useHeaders(rawHeaders);
   // 是否展示大纲栏
-  const hasOutline = headers.length > 0 && !isMobile();
+  const hasOutline = headers.length > 0 && useWindowType() !== 'mobile';
   // 当前标题会进行高亮处理，我们会在这个标题前面加一个 marker 元素
   const markerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const unbinding = bindingAsideScroll();
-    return () => {
-      unbinding();
-    };
-  }, []);
-
-  const renderHeader = (header: Header) => {
+  const renderHeader = (header: Header, index: number) => {
     return (
-      <li key={header.id}>
+      <li key={`${header.id}${index}`}>
         <a
           href={`#${header.id}`}
-          className="block leading-7 text-text-2 hover:text-[var(--feather-c-theme-1)]"
-          transition="color duration-300"
-          style={{
-            paddingLeft: (header.depth - 2) * 12
-          }}
-          onClick={(e) => {
-            e.preventDefault();
-            const target = document.getElementById(header.id);
-            target && scrollToTarget(target, false);
-          }}
+          className="block leading-7 text-base hover:text-[var(--feather-c-theme-1)]"
         >
           {header.text}
         </a>
@@ -56,21 +39,15 @@ export function Aside(props: AsideProps & PropsWithIsland) {
         {hasOutline && (
           <div
             id="aside-container"
-            className="relative divider-left pl-4 text-13px font-medium"
+            className="fixed divider-left pl-4 text-lg font-medium"
           >
             <div
               ref={markerRef}
               id="aside-marker"
-              className="absolute top-33px opacity-0 w-1px h-18px bg-[var(--feather-c-theme-1)]"
-              style={{
-                left: '-1px',
-                transition:
-                  'top 0.25s cubic-bezier(0, 1, 0.5, 1), background-color 0.5s, opacity 0.25s'
-              }}
+              className="absolute opacity-0 w-1px bg-[var(--feather-c-theme-1)]"
             ></div>
             <div
-              leading-7="~"
-              text="13px"
+              text="lg"
               font="semibold"
               className="text-[var(--feather-c-theme-1)]"
             >

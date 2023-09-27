@@ -1,26 +1,21 @@
 const APPEARANCE_KEY = 'appearance';
 
-const setClassList = (isDark = false) => {
-  const classList = document.documentElement.classList;
-  if (isDark) {
-    classList.add('dark');
-  } else {
-    classList.remove('dark');
-  }
+export const setClassList = (isDark = false) => {
+  console.log('setClassList', isDark);
+  // 获取根元素
+  const rootElement = document.documentElement;
+  // 设置根元素的 classList
+  rootElement.classList.remove(isDark ? 'light' : 'dark');
+  rootElement.classList.add(isDark ? 'dark' : 'light');
 };
 
-const updateAppearance = () => {
+// 根据本地状态存储设置主题
+export const updateAppearance = () => {
   const userPreference = localStorage.getItem(APPEARANCE_KEY);
   setClassList(userPreference === 'dark');
 };
 
-// ssr 跳过
-if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
-  updateAppearance();
-  // 多标签页状态同步
-  window.addEventListener('storage', updateAppearance);
-}
-
+// 切换主题时，更新本地状态存储
 export function toggle() {
   const classList = document.documentElement.classList;
   if (classList.contains('dark')) {

@@ -1,0 +1,359 @@
+/**
+ * Colors Base
+ *
+ * These are the pure base color presets. Most of the time, you should not be
+ * using these colors directly in the theme but rather use "Colors Theme"
+ * instead because those are "Theme (light or dark)" dependant.
+ * -------------------------------------------------------------------------- */
+
+:root {
+  --feather-c-white: #ffffff;
+  --feather-c-white-soft: #f9f9f9;
+  --feather-c-white-mute: #f1f1f1;
+
+  --feather-c-black: #1a1a1a;
+  --feather-c-black-pure: #000000;
+  --feather-c-black-soft: #242424;
+  --feather-c-black-mute: #2f2f2f;
+
+  --feather-c-gray: #8e8e8e;
+  --feather-c-gray-light-1: #aeaeae;
+  --feather-c-gray-light-2: #c7c7c7;
+  --feather-c-gray-light-3: #d1d1d1;
+  --feather-c-gray-light-4: #e5e5e5;
+  --feather-c-gray-light-5: #f2f2f2;
+  --feather-c-gray-dark-1: #636363;
+  --feather-c-gray-dark-2: #484848;
+  --feather-c-gray-dark-3: #3a3a3a;
+  --feather-c-gray-dark-4: #282828;
+  --feather-c-gray-dark-5: #202020;
+
+  --feather-c-divider-light-1: rgba(60, 60, 60, 0.29);
+  --feather-c-divider-light-2: rgba(60, 60, 60, 0.12);
+  --feather-c-divider-dark-1: rgba(84, 84, 84, 0.65);
+  --feather-c-divider-dark-2: rgba(84, 84, 84, 0.48);
+
+  --feather-c-indigo: #213547;
+  --feather-c-indigo-soft: #476582;
+  --feather-c-indigo-light: #aac8e4;
+  --feather-c-indigo-lighter: #c9def1;
+  --feather-c-indigo-dark: #1d2f3f;
+  --feather-c-indigo-darker: #14212e;
+
+  --feather-c-text-light-1: var(--feather-c-indigo);
+  --feather-c-text-light-2: rgba(60, 60, 60, 0.7);
+  --feather-c-text-light-3: rgba(60, 60, 60, 0.33);
+  --feather-c-text-light-4: rgba(60, 60, 60, 0.18);
+
+  --feather-c-text-dark-1: rgba(255, 255, 255, 0.87);
+  --feather-c-text-dark-2: rgba(235, 235, 235, 0.6);
+  --feather-c-text-dark-3: rgba(235, 235, 235, 0.38);
+  --feather-c-text-dark-4: rgba(235, 235, 235, 0.18);
+
+  --feather-c-green: #21b8a3;
+  --feather-c-green-light: #41c6b0;
+  --feather-c-green-lighter: #41c6b0;
+  --feather-c-green-dark: #149684;
+  --feather-c-green-darker: #149684;
+  --feather-c-green-dimm: #062521;
+
+  --feather-c-green-dimm-1: rgba(66, 184, 131, 0.5);
+  --feather-c-green-dimm-2: rgba(66, 184, 131, 0.25);
+  --feather-c-green-dimm-3: rgba(66, 184, 131, 0.05);
+
+  --feather-c-blue: #646cff;
+  --feather-c-blue-light: #747bff;
+  --feather-c-blue-lighter: #9499ff;
+  --feather-c-blue-lightest: #bcc0ff;
+  --feather-c-blue-dark: #535bf2;
+  --feather-c-blue-darker: #454ce1;
+  --feather-c-blue-dimm: rgba(100, 108, 255, 0.08);
+
+  --feather-c-yellow: #ffc517;
+  --feather-c-yellow-light: #fcd253;
+  --feather-c-yellow-lighter: #fcfc7c;
+  --feather-c-yellow-darker: #ad850e;
+  --feather-c-yellow-dimm-1: rgba(255, 197, 23, 0.5);
+  --feather-c-yellow-dimm-2: rgba(255, 197, 23, 0.25);
+  --feather-c-yellow-dimm-3: rgba(255, 197, 23, 0.05);
+
+  --feather-c-red: #ed3c50;
+  --feather-c-red-light: #f54e82;
+  --feather-c-red-lighter: #fd1d7c;
+  --feather-c-red-darker: #ab2131;
+  --feather-c-red-dimm-1: rgba(237, 60, 80, 0.5);
+  --feather-c-red-dimm-2: rgba(237, 60, 80, 0.25);
+  --feather-c-red-dimm-3: rgba(237, 60, 80, 0.05);
+}
+
+/**
+   * Colors Theme
+   * -------------------------------------------------------------------------- */
+
+:root {
+  --feather-c-bg: var(--feather-c-white);
+  --feather-c-bg-soft: var(--feather-c-white-soft);
+  --feather-c-bg-mute: var(--feather-c-white-mute);
+  --feather-c-bg-alt: var(--feather-c-white-soft);
+
+  --feather-c-divider: var(--feather-c-divider-light-1);
+  --feather-c-divider-light: var(--feather-c-divider-light-2);
+
+  --feather-c-text-1: var(--feather-c-text-light-1);
+  --feather-c-text-2: var(--feather-c-text-light-2);
+  --feather-c-text-3: var(--feather-c-text-light-3);
+  --feather-c-text-4: var(--feather-c-text-light-4);
+
+  --feather-c-text-code: var(--feather-c-indigo-soft);
+
+  --feather-c-brand: var(--feather-c-green);
+  --feather-c-brand-light: var(--feather-c-green-light);
+  --feather-c-brand-lighter: var(--feather-c-green-lighter);
+  --feather-c-brand-dark: var(--feather-c-green-dark);
+  --feather-c-brand-darker: var(--feather-c-green-darker);
+}
+
+.dark {
+  --feather-c-bg: var(--feather-c-black-soft);
+  --feather-c-bg-soft: var(--feather-c-black-mute);
+  --feather-c-bg-mute: var(--feather-c-gray-dark-3);
+  --feather-c-bg-alt: var(--feather-c-black);
+
+  --feather-c-divider: var(--feather-c-divider-dark-1);
+  --feather-c-divider-light: var(--feather-c-divider-dark-2);
+
+  --feather-c-divider-inverse: var(--feather-c-divider-light-1);
+  --feather-c-divider-inverse-light: var(--feather-c-divider-light-2);
+
+  --feather-c-text-1: var(--feather-c-text-dark-1);
+  --feather-c-text-2: var(--feather-c-text-dark-2);
+  --feather-c-text-3: var(--feather-c-text-dark-3);
+  --feather-c-text-4: var(--feather-c-text-dark-4);
+
+  --feather-c-text-inverse-1: var(--feather-c-text-light-1);
+  --feather-c-text-inverse-2: var(--feather-c-text-light-2);
+  --feather-c-text-inverse-3: var(--feather-c-text-light-3);
+  --feather-c-text-inverse-4: var(--feather-c-text-light-4);
+
+  --feather-c-text-code: var(--feather-c-indigo-lighter);
+}
+
+/**
+   * Typography
+   * -------------------------------------------------------------------------- */
+
+:root {
+  --feather-font-family-base: 'Inter var experimental', 'Inter var',
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+    Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --feather-font-family-mono: Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/**
+   * Layouts
+   * -------------------------------------------------------------------------- */
+
+:root {
+  --feather-layout-max-width: 1440px;
+}
+
+/**
+   * Component: Code
+   * -------------------------------------------------------------------------- */
+
+:root {
+  --feather-code-line-height: 1.7;
+  --feather-code-font-size: 0.875em;
+
+  --feather-code-block-color: var(--feather-c-text-dark-1);
+  --feather-code-block-bg: #292d3e;
+
+  --feather-code-line-highlight-color: rgba(0, 0, 0, 0.5);
+  --feather-code-line-number-color: var(--feather-c-text-dark-3);
+
+  --feather-code-copy-code-hover-bg: rgba(255, 255, 255, 0.05);
+  --feather-code-copy-code-active-text: var(--feather-c-text-dark-2);
+}
+
+/**
+   * Icons
+   * -------------------------------------------------------------------------- */
+
+:root {
+  --feather-icon-copy: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' height='20' width='20' stroke='rgba(128,128,128,1)' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2'/%3E%3C/svg%3E");
+  --feather-icon-copied: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' height='20' width='20' stroke='rgba(128,128,128,1)' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2m-6 9 2 2 4-4'/%3E%3C/svg%3E");
+  --feather-icon-tip: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M512 960C264.58 960 64 759.42 64 512S264.58 64 512 64s448 200.58 448 448-200.58 448-448 448z m0-832c-212.08 0-384 171.92-384 384s171.92 384 384 384 384-171.92 384-384-171.92-384-384-384z m0 112c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z m0 160c-17.67 0-32 14.33-32 32v320c0 17.67 14.33 32 32 32 17.67 0 32-14.33 32-32V432c0-17.67-14.33-32-32-32z' fill='%2321b8a3'/%3E%3C/svg%3E");
+}
+
+.dark {
+  --feather-code-block-bg: var(--feather-c-bg-alt);
+}
+
+/**
+   * Z-indexes
+   * -------------------------------------------------------------------------- */
+
+:root {
+  --feather-z-index-local-nav: 10;
+  --feather-z-index-nav: 20;
+  --feather-z-index-layout-top: 30;
+  --feather-z-index-backdrop: 40;
+  --feather-z-index-sidebar: 50;
+  --feather-z-index-footer: 60;
+}
+
+/**
+   * Component: Button
+   * -------------------------------------------------------------------------- */
+
+:root {
+  --feather-button-brand-border: var(--feather-c-brand-light);
+  --feather-button-brand-text: var(--feather-c-text-dark-1);
+  --feather-button-brand-bg: var(--feather-c-brand);
+  --feather-button-brand-hover-border: var(--feather-c-brand-light);
+  --feather-button-brand-hover-text: var(--feather-c-text-dark-1);
+  --feather-button-brand-hover-bg: var(--feather-c-brand-light);
+  --feather-button-brand-active-border: var(--feather-c-brand-light);
+  --feather-button-brand-active-text: var(--feather-c-text-dark-1);
+  --feather-button-brand-active-bg: var(--feather-button-brand-bg);
+
+  --feather-button-alt-border: var(--feather-c-gray-light-3);
+  --feather-button-alt-text: var(--feather-c-text-light-1);
+  --feather-button-alt-bg: var(--feather-c-gray-light-5);
+  --feather-button-alt-hover-border: var(--feather-c-gray-light-3);
+  --feather-button-alt-hover-text: var(--feather-c-text-light-1);
+  --feather-button-alt-hover-bg: var(--feather-c-gray-light-4);
+  --feather-button-alt-active-border: var(--feather-c-gray-light-3);
+  --feather-button-alt-active-text: var(--feather-c-text-light-1);
+  --feather-button-alt-active-bg: var(--feather-c-gray-light-3);
+
+  --feather-button-sponsor-border: var(--feather-c-gray-light-3);
+  --feather-button-sponsor-text: var(--feather-c-text-light-2);
+  --feather-button-sponsor-bg: transparent;
+  --feather-button-sponsor-hover-border: var(--feather-c-sponsor);
+  --feather-button-sponsor-hover-text: var(--feather-c-sponsor);
+  --feather-button-sponsor-hover-bg: transparent;
+  --feather-button-sponsor-active-border: var(--feather-c-sponsor);
+  --feather-button-sponsor-active-text: var(--feather-c-sponsor);
+  --feather-button-sponsor-active-bg: transparent;
+}
+
+.dark {
+  --feather-button-brand-border: var(--feather-c-brand-light);
+  --feather-button-brand-text: var(--feather-c-text-dark-1);
+  --feather-button-brand-bg: var(--feather-c-brand-dark);
+  --feather-button-brand-hover-border: var(--feather-c-brand-lighter);
+  --feather-button-brand-hover-text: var(--feather-c-text-dark-1);
+  --feather-button-brand-hover-bg: var(--feather-c-brand);
+  --feather-button-brand-active-border: var(--feather-c-brand-lighter);
+  --feather-button-brand-active-text: var(--feather-c-text-dark-1);
+  --feather-button-brand-active-bg: var(--feather-button-brand-bg);
+
+  --feather-button-alt-border: var(--feather-c-gray-dark-2);
+  --feather-button-alt-text: var(--feather-c-text-dark-1);
+  --feather-button-alt-bg: var(--feather-c-bg-mute);
+  --feather-button-alt-hover-border: var(--feather-c-gray-dark-2);
+  --feather-button-alt-hover-text: var(--feather-c-text-dark-1);
+  --feather-button-alt-hover-bg: var(--feather-c-gray-dark-2);
+  --feather-button-alt-active-border: var(--feather-c-gray-dark-2);
+  --feather-button-alt-active-text: var(--feather-c-text-dark-1);
+  --feather-button-alt-active-bg: var(--feather-button-alt-bg);
+
+  --feather-button-sponsor-border: var(--feather-c-gray-dark-1);
+  --feather-button-sponsor-text: var(--feather-c-text-dark-2);
+}
+
+/**
+   * Component: Custom Block
+   * -------------------------------------------------------------------------- */
+
+:root {
+  --feather-custom-block-code-font-size: 13px;
+
+  --feather-custom-block-info-border: var(--feather-c-divider-light);
+  --feather-custom-block-info-text: var(--feather-c-text-2);
+  --feather-custom-block-info-bg: var(--feather-c-white-soft);
+  --feather-custom-block-info-code-bg: var(--feather-c-gray-light-4);
+
+  --feather-custom-block-tip-border: var(--feather-c-green-dimm-1);
+  --feather-custom-block-tip-text: var(--feather-c-green-darker);
+  --feather-custom-block-tip-bg: var(--feather-c-green-dimm-3);
+  --feather-custom-block-tip-code-bg: var(--feather-custom-block-tip-bg);
+
+  --feather-custom-block-warning-border: var(--feather-c-yellow-dimm-1);
+  --feather-custom-block-warning-text: var(--feather-c-yellow-darker);
+  --feather-custom-block-warning-bg: var(--feather-c-yellow-dimm-3);
+  --feather-custom-block-warning-code-bg: var(
+    --feather-custom-block-warning-bg
+  );
+
+  --feather-custom-block-danger-border: var(--feather-c-red-dimm-1);
+  --feather-custom-block-danger-text: var(--feather-c-red-darker);
+  --feather-custom-block-danger-bg: var(--feather-c-red-dimm-3);
+  --feather-custom-block-danger-code-bg: var(--feather-custom-block-danger-bg);
+}
+
+.dark {
+  --feather-custom-block-info-border: var(--feather-c-divider-light);
+  --feather-custom-block-info-bg: var(--feather-c-black-mute);
+  --feather-custom-block-info-code-bg: var(--feather-c-gray-dark-4);
+
+  --feather-custom-block-tip-border: var(--feather-c-green-dimm-2);
+  --feather-custom-block-tip-text: var(--feather-c-green-light);
+
+  --feather-custom-block-warning-border: var(--feather-c-yellow-dimm-2);
+  --feather-custom-block-warning-text: var(--feather-c-yellow-light);
+
+  --feather-custom-block-danger-border: var(--feather-c-red-dimm-2);
+  --feather-custom-block-danger-text: var(--feather-c-red-light);
+}
+
+/**
+   * Component: Nav
+   * -------------------------------------------------------------------------- */
+
+:root {
+  --feather-nav-height: 56px;
+}
+
+/**
+   * Component: Sidebar
+   * -------------------------------------------------------------------------- */
+
+:root {
+  --feather-sidebar-width: 272px;
+  --feather-aside-width: 268px;
+}
+
+/**
+   * Component: Home
+   * -------------------------------------------------------------------------- */
+
+:root {
+  --feather-home-hero-name-color: transparent;
+  --feather-home-hero-name-background: -webkit-linear-gradient(
+    120deg,
+    var(--feather-c-brand) 30%,
+    #41d1ff
+  );
+
+  --feather-home-hero-image-background-image: none;
+  --feather-home-hero-image-filter: none;
+}
+
+/**
+   * Shadows
+   * -------------------------------------------------------------------------- */
+
+:root {
+  --feather-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.04),
+    0 1px 2px rgba(0, 0, 0, 0.06);
+  --feather-shadow-2: 0 3px 12px rgba(0, 0, 0, 0.07),
+    0 1px 4px rgba(0, 0, 0, 0.07);
+  --feather-shadow-3: 0 12px 32px rgba(0, 0, 0, 0.1),
+    0 2px 6px rgba(0, 0, 0, 0.08);
+  --feather-shadow-4: 0 14px 44px rgba(0, 0, 0, 0.12),
+    0 3px 9px rgba(0, 0, 0, 0.12);
+  --feather-shadow-5: 0 18px 56px rgba(0, 0, 0, 0.16),
+    0 4px 12px rgba(0, 0, 0, 0.16);
+}

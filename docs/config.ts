@@ -21,18 +21,6 @@ export default defineConfig({
             {
               text: '快速上手',
               link: '/guide/a'
-            },
-            {
-              text: '配置',
-              link: '/guide/b'
-            },
-            {
-              text: '部署',
-              link: '/guide/c'
-            },
-            {
-              text: '插件',
-              link: '/guide/d'
             }
           ]
         }

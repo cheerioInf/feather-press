@@ -1,6 +1,7 @@
 import { SidebarGroup, SidebarItem } from 'shared/types';
 import styles from './index.module.scss';
-import { Link } from '../Link/index';
+import { Link } from '../Link';
+
 interface SidebarProps {
   sidebarData: SidebarGroup[];
   pathname: string;
@@ -14,11 +15,7 @@ export function Sidebar(props: SidebarProps) {
     return (
       <div ml="3">
         <div
-          p="1"
-          block="~"
-          text="sm"
-          font-medium="~"
-          className={`${
+          className={`p-t-2 p-b-2 text-lg ${
             active
               ? 'text-[var(--feather-c-theme-1)]'
               : 'text-[var(--feather-c-text-3)]'
@@ -32,9 +29,14 @@ export function Sidebar(props: SidebarProps) {
 
   const renderGroup = (item: SidebarGroup) => {
     return (
-      <section key={item.text} block="~" not-first="divider-top mt-4">
-        <div flex="~" justify="between" items="center">
-          <h2 m="t-3 b-2" text="1rem text-1" font="bold">
+      <section key={item.text} block="~">
+        <div flex="~" justify="between" items="center" mb="2">
+          <h2
+            className="text-xl font-bold w-full m-r-5 p-1"
+            style={{
+              borderBottom: 'solid 0.1rem var(--feather-c-border)'
+            }}
+          >
             {item.text}
           </h2>
         </div>

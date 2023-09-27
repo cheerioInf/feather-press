@@ -1,15 +1,26 @@
 import { useState, useEffect } from 'react';
-import { MOBILE_WIDTH } from '../constants';
 
-export default function isMobile() {
-  if (typeof window !== 'undefined') {
-    const [width, setWidth] = useState(window.innerWidth);
-    useEffect(() => {
-      const handleResize = () => setWidth(window.innerWidth);
-      window.addEventListener('resize', handleResize);
-      return () => window.removeEventListener('resize', handleResize);
-    }, []);
+export default function useWindowType() {
+  const [windowType, setWindowType] = useState<'mobile' | 'ipad' | 'pc'>('pc');
 
-    return width <= MOBILE_WIDTH;
-  }
+  useEffect(() => {
+    const handleResize = () => {
+      const { innerWidth } = window;
+      if (innerWidth < 768) {
+        setWindowType('mobile');
+      } else if (innerWidth < 1024) {
+        setWindowType('ipad');
+      } else {
+        setWindowType('pc');
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  return windowType;
 }

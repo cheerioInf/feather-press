@@ -8,9 +8,10 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "baseUrl": "src",
-    // paths 表示路径别名
     "paths": {
-      "@runtime": ["./runtime/index.ts"]
+      "@runtime": [
+        "./runtime/index.ts"
+      ]
     }
   }
 }

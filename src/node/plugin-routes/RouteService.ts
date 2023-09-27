@@ -1,4 +1,3 @@
-// fast-glob: 快速扫描文件
 import fastGlob from 'fast-glob';
 import { normalizePath } from 'vite';
 import { relative } from 'path';
@@ -10,15 +9,14 @@ interface RouteMeta {
 
 export class RouteService {
   // 扫描目录
-  #scanDir: string;
+  readonly #scanDir: string;
   // 路由数据
   #routeData: RouteMeta[] = [];
+
   constructor(scanDir: string) {
-    // 将扫描目录传入
     this.#scanDir = scanDir;
   }
 
-  // 初始化
   async init() {
     // 扫描目录下的所有文件的绝对路径
     const files = fastGlob
@@ -28,6 +26,7 @@ export class RouteService {
         ignore: ['**/node_modules/**', '**/build/**', 'config.ts']
       })
       .sort();
+
     files.forEach((file) => {
       // 1. 路由路径
       const fileRelativePath = normalizePath(relative(this.#scanDir, file));
@@ -40,7 +39,6 @@ export class RouteService {
     });
   }
 
-  // 获取路由数据
   getRouteMeta(): RouteMeta[] {
     return this.#routeData;
   }

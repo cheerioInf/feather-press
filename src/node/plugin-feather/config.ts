@@ -7,9 +7,6 @@ import fs from 'fs-extra';
 
 const SITE_DATA_ID = 'feather:site-data';
 
-/**
- * 获取路由信息
- */
 export function pluginConfig(
   config: SiteConfig,
   restartServer?: () => Promise<void>
@@ -41,9 +38,9 @@ export function pluginConfig(
         return `export default ${JSON.stringify(config.siteData)}`;
       }
     },
-    // 监听配置文件的变化，实现热更新
-    // ctx.file 是当前变化的文件路径数组
     async handleHotUpdate(ctx) {
+      // 监听配置文件的变化，实现热更新
+      // ctx.file 是当前变化的文件路径数组
       const customWatchedFiles = [config.configPath];
       const include = (id: string) =>
         customWatchedFiles.some((file) => id.includes(file));
@@ -62,5 +59,5 @@ export function pluginConfig(
         server.middlewares.use(sirv(publicDir));
       }
     }
-  };
+  } as Plugin;
 }
