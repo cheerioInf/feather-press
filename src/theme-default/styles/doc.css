@@ -13,6 +13,10 @@
   outline: none;
 }
 
+.feather-doc {
+  font-size: 16px;
+}
+
 .feather-doc h1 {
   letter-spacing: -0.02em;
   line-height: 40px;

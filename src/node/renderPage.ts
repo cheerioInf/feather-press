@@ -55,36 +55,24 @@ export async function renderPage(
           name: 'island:inject',
           enforce: 'post',
           resolveId(id) {
-            try {
-              if (id.includes(MASK_SPLITTER)) {
-                const [originId, importer] = id.split(MASK_SPLITTER);
-                return this.resolve(originId, importer, { skipSelf: true });
-              }
-              if (id === injectId) {
-                return id;
-              }
-            } catch (err) {
-              console.error(err);
+            if (id.includes(MASK_SPLITTER)) {
+              const [originId, importer] = id.split(MASK_SPLITTER);
+              return this.resolve(originId, importer, { skipSelf: true });
+            }
+            if (id === injectId) {
+              return id;
             }
           },
           load(id) {
-            try {
-              if (id === injectId) {
-                return islandsInjectCode;
-              }
-            } catch (err) {
-              console.error(err);
+            if (id === injectId) {
+              return islandsInjectCode;
             }
           },
           generateBundle(_options, bundle) {
-            try {
-              for (const name in bundle) {
-                if (bundle[name].type === 'asset') {
-                  delete bundle[name];
-                }
+            for (const name in bundle) {
+              if (bundle[name].type === 'asset') {
+                delete bundle[name];
               }
-            } catch (err) {
-              console.error(err);
             }
           }
         }
