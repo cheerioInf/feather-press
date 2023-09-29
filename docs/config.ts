@@ -5,7 +5,7 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: '主页', link: '/' },
-      { text: '指南', link: '/guide/' }
+      { text: '指南', link: '/guide/quick-start' }
     ],
     githubLink: 'https://github.com/cheerioInf/feather-press',
     sidebar: {
@@ -16,6 +16,10 @@ export default defineConfig({
             {
               text: '介绍',
               link: '/guide/'
+            },
+            {
+              text: '快速开始',
+              link: '/guide/quick-start'
             }
           ]
         }
