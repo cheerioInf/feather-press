@@ -14,7 +14,6 @@ export async function renderPage(
   clientBundle: RollupOutput
 ) {
   console.log('Rendering page in server side...');
-
   async function buildIslands(
     root: string,
     islandPathToMap: Record<string, string>
@@ -38,6 +37,7 @@ export async function renderPage(
     const injectId = 'island:inject';
     return viteBuild({
       mode: 'production',
+      base: './',
       esbuild: {
         jsx: 'automatic'
       },
@@ -144,7 +144,9 @@ export async function renderPage(
           ${helmet?.style?.toString() || ''}
           <meta name='description' content='xxx'>
           ${styleAssets
-            .map((item) => `<link rel='stylesheet' href='/${item.fileName}' />`)
+            .map(
+              (item) => `<link rel='stylesheet' href='./${item.fileName}' />`
+            )
             .join('\n')}
         </head>
         <body>
@@ -159,7 +161,7 @@ export async function renderPage(
             }
           </script>
           <script type='module'>${islandsCode}</script>
-          <script type='module' src='/${clientChunk?.fileName}'></script>
+          <script type='module' src='./${clientChunk?.fileName}'></script>
           <script id='island-props' type='module'>${JSON.stringify(
             islandProps
           )}</script>

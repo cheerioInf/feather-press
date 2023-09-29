@@ -22,6 +22,7 @@ async function bundle(root: string, config: SiteConfig) {
       return {
         mode: 'production',
         root,
+        base: './',
         plugins: await createVitePlugins(config, undefined, isServer),
         ssr: {
           noExternal: ['react-router-dom', 'lodash-es']
