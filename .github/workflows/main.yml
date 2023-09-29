@@ -30,6 +30,7 @@ jobs:
       - name: 部署 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
           folder: ~/work/feather-press/feather-press/docs/build
           clean: true
