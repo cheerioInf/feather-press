@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+      <html lang='en'>
+        <head>
+          <title></title>
+          <meta charset='utf-8'>
+          <meta name='viewport' content='width=device-width,initial-scale=1'>
+          <title data-rh="true">快速开始</title>
+          
+          
+          
+          <meta name='description' content='xxx'>
+          <link rel='stylesheet' href='/assets/client-entry.d4ab0927.css' />
+        </head>
+        <body>
+          <div id='root'><div><header fixed="~" pos="t-0 l-0" w="full" z="10"><div flex="~" items="center" justify="between" class="h-14 divider-bottom _nav_9u95y_1"><div><a href="/" hover="opacity-50 transition-500" class="w-full h-full text-lg font-semibold text-1rem flex items-center">FeatherPress</a></div><div __island="MobileNav:0"><div class="block md:hidden"><div class="i-carbon-text-align-justify w-8 h-8 fill-current"></div></div></div><div class="hidden md:flex align-middle"><div flex="~" class="items-center"><div><div class="text-base font-medium mx-3 flex items-center"><a href="/" class="_link_1j6sd_1"><span>主页</span></a></div></div><div><div class="text-base font-medium mx-3 flex items-center"><a href="/guide/quick-start" class="_link_1j6sd_1"><span>指南</span></a></div></div></div><div before="menu-item-before" flex="~"><div __island="SwitchAppearance:1"><div class="flex items-center"><button class="_switch_lpu3m_1 undefined" id="" type="button" role="switch"><span class="_check_lpu3m_17"><span class="_icon_lpu3m_33"><div class="_sun_lpu3m_56"><div class="i-carbon-sun" w="full" h="full"></div></div><div class="_moon_lpu3m_60"><div class="i-carbon-moon" w="full" h="full"></div></div></span></span></button></div></div></div><div class="_social-link-icon_9u95y_16" before="menu-item-before"><a target="blank" href="https://github.com/cheerioInf/feather-press" class="flex items-center"><div class="i-carbon-logo-github w-8 h-8 fill-current"></div></a></div></div></div></header><section class="pt-[--feather-nav-height]"><div><div class="content" flex="~"><div class="hidden md:block"><aside class="_sidebar_17vh1_1"><nav><section block="~"><div flex="~" justify="between" items="center" mb="2"><h2 class="text-xl font-bold w-full m-r-5 p-1" style="border-bottom:solid 0.1rem var(--feather-c-border)">教程</h2></div><div mb="1"><div><div ml="3"><div class="p-t-2 p-b-2 text-lg text-[var(--feather-c-text-3)]"><a href="/guide/" target="" class="_link_143xu_1 ">介绍</a></div></div></div><div><div ml="3"><div class="p-t-2 p-b-2 text-lg text-[var(--feather-c-theme-1)]"><a href="/guide/quick-start" target="" class="_link_143xu_1 ">快速开始</a></div></div></div></div></section></nav></aside></div><div class="doc-content pl-0 md:pl-100"><div class="feather-doc"><h1 id="快速开始"><a class="header-anchor" href="#快速开始">#</a>快速开始</h1>
+<h2 id="安装"><a class="header-anchor" href="#安装">#</a>安装</h2>
+<p>在项目已经初始化的情况下，执行以下命令安装依赖：</p>
+<div class="language-bash"><span class="lang">bash</span><pre class="shiki vitesse-dark" style="background-color:#121212" tabindex="0"><code><span class="line"><span style="color:#80A665">pnpm</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D">install</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D">feather-press</span></span>
+<span class="line"></span></code></pre></div>
+<h2 id="首页配置文件"><a class="header-anchor" href="#首页配置文件">#</a>首页配置文件</h2>
+<p>在项目根目录下新建 <code>index.mdx</code> 文件，内容如下：</p>
+<div class="language-mdx"><span class="lang">mdx</span><pre class="shiki vitesse-dark" style="background-color:#121212" tabindex="0"><code><span class="line"><span style="color:#BD976A">-</span><span style="color:#DBD7CAEE"> pageType: 页面类型</span></span>
+<span class="line"><span style="color:#BD976A">-</span><span style="color:#DBD7CAEE"> hero: 头部配置</span></span>
+<span class="line"><span style="color:#DBD7CAEE">  </span><span style="color:#BD976A">-</span><span style="color:#DBD7CAEE"> name: 标题</span></span>
+<span class="line"><span style="color:#DBD7CAEE">  </span><span style="color:#BD976A">-</span><span style="color:#DBD7CAEE"> text: 副标题</span></span>
+<span class="line"><span style="color:#DBD7CAEE">  </span><span style="color:#BD976A">-</span><span style="color:#DBD7CAEE"> tagline: 标语</span></span>
+<span class="line"><span style="color:#DBD7CAEE">  </span><span style="color:#BD976A">-</span><span style="color:#DBD7CAEE"> image: 图片</span></span>
+<span class="line"><span style="color:#DBD7CAEE">  </span><span style="color:#BD976A">-</span><span style="color:#DBD7CAEE"> actions: 按钮</span></span>
+<span class="line"><span style="color:#DBD7CAEE">    </span><span style="color:#BD976A">-</span><span style="color:#DBD7CAEE"> theme: 按钮主题</span></span>
+<span class="line"><span style="color:#BD976A">-</span><span style="color:#DBD7CAEE"> features: 特性</span></span>
+<span class="line"><span style="color:#DBD7CAEE">  </span><span style="color:#BD976A">-</span><span style="color:#DBD7CAEE"> title: 标题</span></span>
+<span class="line"><span style="color:#DBD7CAEE">  </span><span style="color:#BD976A">-</span><span style="color:#DBD7CAEE"> details: 详情</span></span>
+<span class="line"><span style="color:#DBD7CAEE">  </span><span style="color:#BD976A">-</span><span style="color:#DBD7CAEE"> icon: 图标</span></span>
+<span class="line"></span></code></pre></div>
+<p>使用事例：</p>
+<div class="language-mdx"><span class="lang">mdx</span><pre class="shiki vitesse-dark" style="background-color:#121212" tabindex="0"><code><span class="line"><span style="color:#C98A7D">---</span></span>
+<span class="line"><span style="color:#B8A965">pageType</span><span style="color:#666666">:</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D">home</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B8A965">hero</span><span style="color:#666666">:</span></span>
+<span class="line"><span style="color:#DBD7CAEE">  </span><span style="color:#B8A965">name</span><span style="color:#666666">:</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D">Feather</span></span>
+<span class="line"><span style="color:#DBD7CAEE">  </span><span style="color:#B8A965">text</span><span style="color:#666666">:</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D">基于 Vite 和 Island 架构的静态站点生成器</span></span>
+<span class="line"><span style="color:#DBD7CAEE">  </span><span style="color:#B8A965">tagline</span><span style="color:#666666">:</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D">简单、高效的 SSG 方案</span></span>
+<span class="line"><span style="color:#DBD7CAEE">  </span><span style="color:#B8A965">image</span><span style="color:#666666">:</span></span>
+<span class="line"><span style="color:#DBD7CAEE">    </span><span style="color:#B8A965">src</span><span style="color:#666666">:</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D">/feather.png</span></span>
+<span class="line"><span style="color:#DBD7CAEE">    </span><span style="color:#B8A965">alt</span><span style="color:#666666">:</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D">feather</span></span>
+<span class="line"><span style="color:#DBD7CAEE">  </span><span style="color:#B8A965">actions</span><span style="color:#666666">:</span></span>
+<span class="line"><span style="color:#DBD7CAEE">    </span><span style="color:#666666">-</span><span style="color:#DBD7CAEE"> </span><span style="color:#B8A965">theme</span><span style="color:#666666">:</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D">brand</span></span>
+<span class="line"><span style="color:#DBD7CAEE">      </span><span style="color:#B8A965">text</span><span style="color:#666666">:</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D">快速开始</span></span>
+<span class="line"><span style="color:#DBD7CAEE">      </span><span style="color:#B8A965">link</span><span style="color:#666666">:</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D">/guide/</span></span>
+<span class="line"><span style="color:#DBD7CAEE">    </span><span style="color:#666666">-</span><span style="color:#DBD7CAEE"> </span><span style="color:#B8A965">theme</span><span style="color:#666666">:</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D">alt</span></span>
+<span class="line"><span style="color:#DBD7CAEE">      </span><span style="color:#B8A965">text</span><span style="color:#666666">:</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D">GitHub 地址</span></span>
+<span class="line"><span style="color:#DBD7CAEE">      </span><span style="color:#B8A965">link</span><span style="color:#666666">:</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D">https://github.com/cheerioInf/feather-press</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B8A965">features</span><span style="color:#666666">:</span></span>
+<span class="line"><span style="color:#DBD7CAEE">  </span><span style="color:#666666">-</span><span style="color:#DBD7CAEE"> </span><span style="color:#B8A965">title</span><span style="color:#666666">:</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D99">&#x27;</span><span style="color:#C98A7D">基于 Island 孤岛架构实现生产高性能</span><span style="color:#C98A7D99">&#x27;</span></span>
+<span class="line"><span style="color:#DBD7CAEE">    </span><span style="color:#B8A965">details</span><span style="color:#666666">:</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D">采用 feathers 架构，意味着更少的 JavaScript 代码、局部 hydration， 从而带来更好的首屏性能。</span></span>
+<span class="line"><span style="color:#DBD7CAEE">    </span><span style="color:#B8A965">icon</span><span style="color:#666666">:</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D">✨</span></span>
+<span class="line"><span style="color:#DBD7CAEE">  </span><span style="color:#666666">-</span><span style="color:#DBD7CAEE"> </span><span style="color:#B8A965">title</span><span style="color:#666666">:</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D">基于 Vite 的极速开发响应</span></span>
+<span class="line"><span style="color:#DBD7CAEE">    </span><span style="color:#B8A965">details</span><span style="color:#666666">:</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D">基于 Vite 构建，开发时的响应速度极快，即时的热更新，带给你极致的开发体验。</span></span>
+<span class="line"><span style="color:#DBD7CAEE">    </span><span style="color:#B8A965">icon</span><span style="color:#666666">:</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D">🚀</span></span>
+<span class="line"><span style="color:#DBD7CAEE">  </span><span style="color:#666666">-</span><span style="color:#DBD7CAEE"> </span><span style="color:#B8A965">title</span><span style="color:#666666">:</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D99">&#x27;</span><span style="color:#C98A7D">使用 MDX 语法编写文档内容</span><span style="color:#C98A7D99">&#x27;</span></span>
+<span class="line"><span style="color:#DBD7CAEE">    </span><span style="color:#B8A965">details</span><span style="color:#666666">:</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D">MDX 是一种强大的方式来写内容。你可以在 Markdown 中使用 React 组件。</span></span>
+<span class="line"><span style="color:#DBD7CAEE">    </span><span style="color:#B8A965">icon</span><span style="color:#666666">:</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D">📦</span></span>
+<span class="line"><span style="color:#C98A7D">---</span></span>
+<span class="line"></span></code></pre></div>
+<h2 id="文档配置文件"><a class="header-anchor" href="#文档配置文件">#</a>文档配置文件</h2>
+<p>在项目根目录下新建 <code>config.ts</code> 文件，事例内容如下：</p>
+<div class="language-ts"><span class="lang">ts</span><pre class="shiki vitesse-dark" style="background-color:#121212" tabindex="0"><code><span class="line"><span style="color:#4D9375">import</span><span style="color:#DBD7CAEE"> </span><span style="color:#666666">{</span><span style="color:#DBD7CAEE"> </span><span style="color:#BD976A">defineConfig</span><span style="color:#DBD7CAEE"> </span><span style="color:#666666">}</span><span style="color:#DBD7CAEE"> </span><span style="color:#4D9375">from</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D99">&#x27;</span><span style="color:#C98A7D">feather-press</span><span style="color:#C98A7D99">&#x27;</span><span style="color:#666666">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#4D9375">export</span><span style="color:#DBD7CAEE"> </span><span style="color:#4D9375">default</span><span style="color:#DBD7CAEE"> </span><span style="color:#80A665">defineConfig</span><span style="color:#666666">({</span></span>
+<span class="line"><span style="color:#666666">  </span><span style="color:#B8A965">title</span><span style="color:#666666">: </span><span style="color:#C98A7D99">&#x27;</span><span style="color:#C98A7D">FeatherPress</span><span style="color:#C98A7D99">&#x27;</span><span style="color:#666666">, </span><span style="color:#758575DD">// 标题</span></span>
+<span class="line"><span style="color:#666666">  </span><span style="color:#B8A965">themeConfig</span><span style="color:#666666">: {</span></span>
+<span class="line"><span style="color:#666666">    </span><span style="color:#758575DD">// 菜单栏</span></span>
+<span class="line"><span style="color:#666666">    </span><span style="color:#B8A965">nav</span><span style="color:#666666">: [</span></span>
+<span class="line"><span style="color:#666666">      { </span><span style="color:#B8A965">text</span><span style="color:#666666">: </span><span style="color:#C98A7D99">&#x27;</span><span style="color:#C98A7D">主页</span><span style="color:#C98A7D99">&#x27;</span><span style="color:#666666">, </span><span style="color:#B8A965">link</span><span style="color:#666666">: </span><span style="color:#C98A7D99">&#x27;</span><span style="color:#C98A7D">/</span><span style="color:#C98A7D99">&#x27;</span><span style="color:#666666"> },</span></span>
+<span class="line"><span style="color:#666666">      { </span><span style="color:#B8A965">text</span><span style="color:#666666">: </span><span style="color:#C98A7D99">&#x27;</span><span style="color:#C98A7D">指南</span><span style="color:#C98A7D99">&#x27;</span><span style="color:#666666">, </span><span style="color:#B8A965">link</span><span style="color:#666666">: </span><span style="color:#C98A7D99">&#x27;</span><span style="color:#C98A7D">/guide/quick-start</span><span style="color:#C98A7D99">&#x27;</span><span style="color:#666666"> }</span></span>
+<span class="line"><span style="color:#666666">    ],</span></span>
+<span class="line"><span style="color:#666666">    </span><span style="color:#758575DD">// github 链接</span></span>
+<span class="line"><span style="color:#666666">    </span><span style="color:#B8A965">githubLink</span><span style="color:#666666">: </span><span style="color:#C98A7D99">&#x27;</span><span style="color:#C98A7D">https://github.com/cheerioInf/feather-press</span><span style="color:#C98A7D99">&#x27;</span><span style="color:#666666">,</span></span>
+<span class="line"><span style="color:#666666">    </span><span style="color:#758575DD">// 侧边栏</span></span>
+<span class="line"><span style="color:#666666">    </span><span style="color:#B8A965">sidebar</span><span style="color:#666666">: {</span></span>
+<span class="line"><span style="color:#666666">      </span><span style="color:#C98A7D99">&#x27;</span><span style="color:#C98A7D">/guide/</span><span style="color:#C98A7D99">&#x27;</span><span style="color:#666666">: [</span></span>
+<span class="line"><span style="color:#666666">        {</span></span>
+<span class="line"><span style="color:#666666">          </span><span style="color:#B8A965">text</span><span style="color:#666666">: </span><span style="color:#C98A7D99">&#x27;</span><span style="color:#C98A7D">教程</span><span style="color:#C98A7D99">&#x27;</span><span style="color:#666666">,</span></span>
+<span class="line"><span style="color:#666666">          </span><span style="color:#B8A965">items</span><span style="color:#666666">: [</span></span>
+<span class="line"><span style="color:#666666">            {</span></span>
+<span class="line"><span style="color:#666666">              </span><span style="color:#B8A965">text</span><span style="color:#666666">: </span><span style="color:#C98A7D99">&#x27;</span><span style="color:#C98A7D">介绍</span><span style="color:#C98A7D99">&#x27;</span><span style="color:#666666">,</span></span>
+<span class="line"><span style="color:#666666">              </span><span style="color:#B8A965">link</span><span style="color:#666666">: </span><span style="color:#C98A7D99">&#x27;</span><span style="color:#C98A7D">/guide/</span><span style="color:#C98A7D99">&#x27;</span></span>
+<span class="line"><span style="color:#666666">            },</span></span>
+<span class="line"><span style="color:#666666">            {</span></span>
+<span class="line"><span style="color:#666666">              </span><span style="color:#B8A965">text</span><span style="color:#666666">: </span><span style="color:#C98A7D99">&#x27;</span><span style="color:#C98A7D">快速开始</span><span style="color:#C98A7D99">&#x27;</span><span style="color:#666666">,</span></span>
+<span class="line"><span style="color:#666666">              </span><span style="color:#B8A965">link</span><span style="color:#666666">: </span><span style="color:#C98A7D99">&#x27;</span><span style="color:#C98A7D">/guide/quick-start</span><span style="color:#C98A7D99">&#x27;</span></span>
+<span class="line"><span style="color:#666666">            }</span></span>
+<span class="line"><span style="color:#666666">          ]</span></span>
+<span class="line"><span style="color:#666666">        }</span></span>
+<span class="line"><span style="color:#666666">      ]</span></span>
+<span class="line"><span style="color:#666666">    }</span></span>
+<span class="line"><span style="color:#666666">  }</span></span>
+<span class="line"><span style="color:#666666">});</span></span>
+<span class="line"></span></code></pre></div>
+<p>其中 <code>link</code> 的路径是以项目根目录为基准的。</p>
+<h2 id="静态资源"><a class="header-anchor" href="#静态资源">#</a>静态资源</h2>
+<p>在项目根目录下新建 <code>public</code> 文件夹，将图片等静态资源放入其中。</p>
+<p>打包后，静态资源会被复制到 <code>dist</code> 文件夹下。</p>
+<h2 id="启动项目"><a class="header-anchor" href="#启动项目">#</a>启动项目</h2>
+<p>调试项目：</p>
+<div class="language-bash"><span class="lang">bash</span><pre class="shiki vitesse-dark" style="background-color:#121212" tabindex="0"><code><span class="line"><span style="color:#80A665">feather</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D">dev</span></span>
+<span class="line"></span></code></pre></div>
+<p>打包项目：</p>
+<div class="language-bash"><span class="lang">bash</span><pre class="shiki vitesse-dark" style="background-color:#121212" tabindex="0"><code><span class="line"><span style="color:#80A665">feather</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D">build</span></span>
+<span class="line"></span></code></pre></div>
+<p>预览打包后的项目：</p>
+<div class="language-bash"><span class="lang">bash</span><pre class="shiki vitesse-dark" style="background-color:#121212" tabindex="0"><code><span class="line"><span style="color:#80A665">feather</span><span style="color:#DBD7CAEE"> </span><span style="color:#C98A7D">preview</span></span>
+<span class="line"></span></code></pre></div></div><footer mt="8"><div flex="~" gap="2" divider-top="~" pt="6" pb="6"><div flex="~ col" class="_prev_1a3q2_1"><a href="/guide/" class="_pager-link_1a3q2_6"><span class="_desc_1a3q2_25">上一页</span><span class="_title_1a3q2_33">介绍</span></a></div><div flex="~ col" class="_next_1a3q2_2"></div></div></footer></div><div class="aside-container hidden lg:block"><div flex="~ col 1" style="width:var(--feather-aside-width)"><div><div id="aside-container" class="fixed divider-left pl-4 text-lg font-medium"><div id="aside-marker" class="absolute opacity-0 w-1px bg-[var(--feather-c-theme-1)]"></div><div text="lg" font="semibold" class="text-[var(--feather-c-theme-1)]">ON THIS PAGE</div><nav><ul relative="~"><li><a href="#安装" class="block leading-7 text-base hover:text-[var(--feather-c-theme-1)]">安装</a></li><li><a href="#首页配置文件" class="block leading-7 text-base hover:text-[var(--feather-c-theme-1)]">首页配置文件</a></li><li><a href="#文档配置文件" class="block leading-7 text-base hover:text-[var(--feather-c-theme-1)]">文档配置文件</a></li><li><a href="#静态资源" class="block leading-7 text-base hover:text-[var(--feather-c-theme-1)]">静态资源</a></li><li><a href="#启动项目" class="block leading-7 text-base hover:text-[var(--feather-c-theme-1)]">启动项目</a></li></ul></nav></div></div></div></div></div></div></section></div></div>
+          <script type='importmap'>
+            {
+              "imports": {
+                "react": "/react.js","react-dom": "/react-dom.js","react-dom/client": "/react-dom_client.js","react/jsx-runtime": "/react_jsx-runtime.js"
+              }
+            }
+          </script>
+          <script type='module'>import{jsxs as c,jsx as e}from"react/jsx-runtime";import{useState as _,useEffect as f}from"react";const k="_check_lpu3m_17",b="_icon_lpu3m_33",p="_dark_lpu3m_28",N="_sun_lpu3m_56",v="_moon_lpu3m_60",i={switch:"_switch_lpu3m_1",check:k,icon:b,dark:p,sun:N,moon:v},o="appearance",a=(n=!1)=>{console.log("setClassList",n);const l=document.documentElement;l.classList.remove(n?"light":"dark"),l.classList.add(n?"dark":"light")},r=()=>{const n=localStorage.getItem(o);a(n==="dark")};function w(){document.documentElement.classList.contains("dark")?(a(!1),localStorage.setItem(o,"light")):(a(!0),localStorage.setItem(o,"dark"))}function y(n){var l;return e("div",{className:"flex items-center",children:e("button",{className:`${i.switch} ${n.className}`,id:(l=n.id)!=null?l:"",type:"button",role:"switch",...n.onClick?{onClick:n.onClick}:{},children:e("span",{className:i.check,children:e("span",{className:i.icon,children:n.children})})})})}function u(n){return typeof window<"u"&&typeof localStorage<"u"&&(r(),window.addEventListener("storage",r)),c(y,{onClick:w,children:[e("div",{className:i.sun,children:e("div",{className:"i-carbon-sun",w:"full",h:"full"})}),e("div",{className:i.moon,children:e("div",{className:"i-carbon-moon",w:"full",h:"full"})})]})}const g="_link_1j6sd_1",M="_linkMobile_1j6sd_7",m={link:g,linkMobile:M};function x({item:n,mobile:l}){return e("div",{children:l?e("div",{children:e("div",{className:"text-xl font-medium mx-8 flex items-center w-full",children:e("a",{href:n.link,className:m.linkMobile,children:e("span",{children:n.text})})})}):e("div",{className:"text-base font-medium mx-3 flex items-center",children:e("a",{href:n.link,className:m.link,children:e("span",{children:n.text})})})})}const S="_nav_9u95y_1",A="_mobileMenu_9u95y_6",L="_mobileAppearance_9u95y_34",t={nav:S,mobileMenu:A,"social-link-icon":"_social-link-icon_9u95y_16","social-link-iconMobile":"_social-link-iconMobile_9u95y_26",mobileAppearance:L};function C({nav:n,githubLink:l,__island:E}){const[s,h]=_(!1);return f(()=>{s?document.body.style.overflow="hidden":document.body.style.overflow="auto"},[s]),c("div",{className:"block md:hidden",children:[e("div",{onClick:()=>h(!s),className:"i-carbon-text-align-justify w-8 h-8 fill-current"}),s&&c("div",{className:t.mobileMenu,children:[n.map(d=>e(x,{item:d,mobile:!0},d.text)),c("div",{className:t.mobileAppearance,children:[e("div",{style:{transform:"scale(1.2)"},children:e(u,{__island:!0})}),e("div",{className:t.socialLinkIconMobile,children:e("a",{target:"blank",href:l,className:"flex items-center",children:e("div",{className:"i-carbon-logo-github w-10 h-10 fill-current"})})})]})]})]})}window.ISLANDS={MobileNav:C,SwitchAppearance:u};window.ISLAND_PROPS=JSON.parse(document.getElementById("island-props").textContent);
+</script>
+          <script type='module' src='/assets/client-entry.35165d64.js'></script>
+          <script id='island-props' type='module'>[{"nav":[{"text":"主页","link":"/"},{"text":"指南","link":"/guide/quick-start"}],"githubLink":"https://github.com/cheerioInf/feather-press"},{}]</script>
+        </body>
+      </html>
