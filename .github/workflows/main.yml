@@ -1,0 +1,32 @@
+name: Actions CI
+on:
+  push:
+    branches: [ master ]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 获取源码  🛎️
+      uses: actions/checkout@v3
+    - name: Node环境版本 🗜️
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+    - name: 安装 Pnpm 🧬
+      uses: pnpm/action-setup@v2
+      id: pnpm-install
+      with:
+          version: 7
+          run_install: true
+    - name: 安装依赖 ⚙️
+      run: pnpm install
+    - name: 打包 🏗️
+      run: |
+        npm run build
+        touch out/.nojekyll
+    - name: 部署 🚀
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        branch: gh-pages
+        folder: out
+        clean: true
