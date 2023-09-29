@@ -8,7 +8,6 @@ export default defineConfig({
       { text: '指南', link: '/guide/' }
     ],
     githubLink: 'https://github.com/cheerioInf/feather-press',
-    // 新增 sidebar 的内容
     sidebar: {
       '/guide/': [
         {
@@ -17,10 +16,6 @@ export default defineConfig({
             {
               text: '介绍',
               link: '/guide/'
-            },
-            {
-              text: '快速上手',
-              link: '/guide/a'
             }
           ]
         }

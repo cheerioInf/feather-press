@@ -1,4 +1,3 @@
-// theme-default/components/HomeHero/index.tsx
 import { Hero } from 'shared/types';
 import { Button } from '../Button';
 
@@ -23,8 +22,10 @@ export function HomeHero(props: { hero: Hero }) {
           </div>
         )}
         <div className="text-center md:text-left" flex="~ col">
-          <h1 font="bold" text="6xl">
-            <span className="text-[var(--feather-c-theme-1)]">{hero.name}</span>
+          <h1 font="bold">
+            <span className="text-[var(--feather-c-theme-1)] text-4xl md:text-6xl">
+              {hero.name}
+            </span>
           </h1>
           <p className="text-2xl md:text-3xl" font="bold">
             {hero.text}

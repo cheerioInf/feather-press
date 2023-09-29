@@ -1,3 +1,7 @@
+## [1.0.4](https://github.com/cheerioInf/feather-press/compare/v1.0.3...v1.0.4) (2023-09-29)
+
+
+
 ## 1.0.3 (2023-09-28)
 
 

@@ -1,10 +1,11 @@
 {
   "name": "feather-press",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Vite SSG framework based on islands arch",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "exports": "./dist/index.mjs",
   "scripts": {
     "prepare": "husky install",
     "dev": "tsup --watch",
