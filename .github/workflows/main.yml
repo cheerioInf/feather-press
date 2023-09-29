@@ -24,6 +24,7 @@ jobs:
       - name: 打包 🏗️
         run: |
           npm run build
+          npm link
           cd docs
           feather build
       - name: 部署 🚀
