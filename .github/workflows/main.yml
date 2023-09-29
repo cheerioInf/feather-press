@@ -25,10 +25,10 @@ jobs:
         run: |
           npm run build
           cd docs
-          npm run build
+          feather build
       - name: 部署 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: ~/docs/build
+          folder: ~/work/feather-press/feather-press/docs/build
           clean: true
