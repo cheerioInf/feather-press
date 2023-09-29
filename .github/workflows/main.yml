@@ -1,10 +1,12 @@
-# 部署 /docs/build 文件夹
-name: Actions CI
+name: Actions CI - Next.js version 12 static site export, GitHub Actions Build and Deploy
 on:
   push:
-    branches: [master]
+    branches: [main]
+# 执行的一项或多项任务
 jobs:
   build-and-deploy:
+    # 运行在虚拟机环境ubuntu-latest
+    # https://docs.github.com/zh/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
     runs-on: ubuntu-latest
     steps:
       - name: 获取源码  🛎️
@@ -20,7 +22,7 @@ jobs:
           version: 7
           run_install: true
       - name: 安装依赖 ⚙️
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install
       - name: 打包 🏗️
         run: |
           npm run build
