@@ -26,10 +26,9 @@ jobs:
           npm run build
           cd docs
           npm run build
-          touch /home/runner/work/feather-press/feather-press/docs/build/.nojekyll
       - name: 部署 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: /home/runner/work/feather-press/feather-press/docs/build
+          folder: /docs/build
           clean: true
