@@ -24,10 +24,12 @@ jobs:
       - name: 打包 🏗️
         run: |
           npm run build
-          touch build/.nojekyll
+          cd docs
+          npm run build
+          touch docs/build/.nojekyll
       - name: 部署 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: build
+          folder: docs/build
           clean: true
